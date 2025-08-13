@@ -16,12 +16,14 @@ html {
     scroll-behavior: smooth;
 }
 :root{
-    --logo-size: 110px;          /* adjust: 96–128px usually looks great */
-    --ring-grow: 10px;           /* ring slightly larger than logo */
-    --nav-vpad: 12px;            /* vertical padding inside the navbar */
+    --logo-size: 60px;          /* Reduced from 145px */
+    --ring-grow: 0.5px;         
+    --nav-vpad: 8px;            /* Reduced from 10px */
     --nav-height: calc(var(--logo-size) + (var(--nav-vpad) * 2));
-    --logo-shift-x: 0px;         /* micro-nudge to center spine if needed */
-  }
+    --logo-shift-x: 0px;        
+    --about-focus-x: 85%;   
+    --about-focus-y: 50%;
+}
   
 
 body {
@@ -42,14 +44,17 @@ body {
     padding: 0;                   /* keep height controlled by container */
   }
 
-.nav-container {
+
+  .nav-container {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding: var(--nav-vpad) 2rem; /* Use the variable for consistent spacing */
+    height: var(--nav-height);
 }
+
 /* Make the logo a fixed box so the ring centers */
 .nav-logo{
     position: relative;
@@ -110,13 +115,16 @@ section[id] { scroll-margin-top: var(--nav-height); }
     
 }
 
-/* Responsive logo size */
+/* Update responsive breakpoints */
+@media (max-width: 1024px){
+    :root{ --logo-size: 50px; --nav-vpad: 6px; }
+}
 @media (max-width: 768px){
-    .nav-logo{ width: 50px; height: 50px; }
-  }
-  @media (max-width: 480px){
-    .nav-logo{ width: 40px; height: 40px; }
-  }
+    :root{ --logo-size: 40px; --nav-vpad: 6px; }
+}
+@media (max-width: 480px){
+    :root{ --logo-size: 35px; --nav-vpad: 5px; }
+}
 
 .nav-menu {
     display: flex;
@@ -188,6 +196,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
 
 /* HERO SECTION */
 .hero {
+    margin-top: var(--nav-height);
     background: white;
 }
 
@@ -239,9 +248,19 @@ section[id] { scroll-margin-top: var(--nav-height); }
 .hero-picture {
     margin-top: 40px;
     height: clamp(260px, 42vw, 560px);
-    background: url() center/cover no-repeat;
+    background: linear-gradient(135deg, #EB2526 0%, #dc2626 100%);
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.hero-picture::after {
+    content: "Chiropractic Excellence";
 }
 
 /* ABOUT SECTION STYLING */
@@ -274,12 +293,15 @@ section[id] { scroll-margin-top: var(--nav-height); }
     box-shadow: 0 6px 20px rgba(235, 37, 38, .2);
     transition: transform .15s ease, opacity .15s ease;
     cursor: pointer;
+    width: fit-content;
+    margin-top: 20px;
 }
 
 .btn-secondary:hover { 
     transform: translateY(-1px); 
     opacity: .95;
 }
+
 /* Vertical image panel */
 .about-picture{
     position: relative;
@@ -288,6 +310,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     border-left: 2px solid #EB2526;
     border-radius: 16px;
     overflow: hidden;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
   }
 
 .about-title {
@@ -305,16 +328,26 @@ section[id] { scroll-margin-top: var(--nav-height); }
     margin: 0 0 28px;
 }
 
-/* Make the image fill the frame cleanly */
 .about-picture .about-img{
-    position: absolute;
-    inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;                    /* fills without distortion */
-    object-position: 50% 50%;             /* tweak focus if needed */
-    display: block;
+    object-fit: cover;
+    object-position: var(--about-focus-x) var(--about-focus-y);
   }
+
+.about-picture::after {
+    content: "Professional Chiropractic Care";
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+}
 
   @media (max-width: 768px){
     .about-picture{ aspect-ratio: 4 / 5; min-height: 360px; }
@@ -551,6 +584,74 @@ section[id] { scroll-margin-top: var(--nav-height); }
     background: linear-gradient(135deg, #dc2626, #b91c1c);
     transform: translateY(-3px);
     box-shadow: 0 15px 35px rgba(235, 37, 38, 0.3);
+}
+/* TESTIMONIALS STYLING */
+.testimonials {
+    background: linear-gradient(135deg, #fff9f9 0%, #f9fafb 100%);
+    padding: clamp(56px, 7vw, 96px) 16px;
+}
+
+.testimonial-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.testimonial-title {
+    color: #EB2526;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-size: clamp(35px, 6.5vw, 60px);
+    margin: 0;
+}
+
+.testimonial-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.testimonial-item {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(235, 37, 38, 0.1);
+    border: 1px solid rgba(235, 37, 38, 0.1);
+}
+
+.testimonial-item h4 {
+    color: #EB2526;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.testimonial-item p {
+    color: #374151;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* FOOTER STYLING */
+.footer {
+    background: #EB2526;
+    color: white;
+    padding: 40px 16px;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-container p {
+    font-size: 1rem;
+    opacity: 0.9;
 }
 
 /* Responsive Design */

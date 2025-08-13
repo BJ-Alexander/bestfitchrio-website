@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Scroll-based navigation highlighting (fixed to match your HTML)
+    // Scroll-based navigation highlighting
     window.addEventListener('scroll', function() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-menu li a');
@@ -39,15 +39,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Handle special case: "contact " link with space maps to "booking" section
         navLinks.forEach(link => {
             link.classList.remove('active');
             const href = link.getAttribute('href');
             
-            // Fix: Handle your contact link with space
-            if (href === '#contact ' && currentSection === 'booking') {
-                link.classList.add('active');
-            } else if (href === `#${currentSection}`) {
+            if (href === `#${currentSection}`) {
                 link.classList.add('active');
             }
         });
@@ -96,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Smooth scrolling for navigation links (enhanced)
+    // Smooth scrolling for navigation links
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
@@ -105,12 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (href.startsWith('#')) {
                 e.preventDefault();
                 
-                // Map "contact " (with space) to "booking" section
-                let targetId = href.substring(1).trim(); // Remove # and trim space
-                if (targetId === 'contact') {
-                    targetId = 'booking'; // Map to actual section ID
-                }
-                
+                const targetId = href.substring(1);
                 const targetSection = document.getElementById(targetId);
                 
                 if (targetSection) {
@@ -138,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Form submission handling (optional enhancement)
+    // Form submission handling
     const bookingForm = document.querySelector('#booking form');
     if (bookingForm) {
         bookingForm.addEventListener('submit', function(e) {
@@ -168,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add CSS for auto-fill detection (append to head)
+    // Add CSS for auto-fill detection
     const style = document.createElement('style');
     style.textContent = `
         @keyframes onAutoFillStart {
@@ -181,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function() {
             animation-duration: 0.001s;
         }
         
-        /* Ensure auto-filled inputs show floating labels */
         input:-webkit-autofill + label {
             top: -8px !important;
             left: 15px !important;
@@ -195,8 +185,5 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 
-    // Console log for debugging
     console.log('BestFit Chiropractic JavaScript loaded successfully!');
-    console.log('Sections found:', document.querySelectorAll('section[id]').length);
-    console.log('Nav links found:', navLinks.length);
 });
