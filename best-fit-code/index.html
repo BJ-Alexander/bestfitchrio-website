@@ -18,25 +18,31 @@
     </head>
 
     <body>
-        <!--Navgation Header-->
         <nav class="navbar">
             <div class="nav-container">
-                <div class="nav-logo with-image">
-                    <!-- Logo appears automatically from CSS -->
-                    <!--Best Fit Logo code will go here, if we decide to
-                    to place logo in the navagation bar-->
-                </div> 
-                <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#our-services">Our Services</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
+            <!-- replace your current logo div -->
+            <a href="#home" class="nav-logo with-image" aria-label="BestFit Chiropractic — Home">
+                <img
+                  class="nav-logo-img"
+                  src="./images/best-fit-logo.png"
+                  alt="BestFit Chiropractic logo"
+                  loading="eager"
+                  decoding="async"
+                  onerror="this.onerror=null; this.src='../images/best-fit-logo.png';"
+                />
+            </a>
+              <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#our-services">Our Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+          
+              <div class="hamburger" aria-label="Toggle menu" aria-expanded="false" role="button">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div>
             </div>
         </nav>
 
@@ -54,28 +60,25 @@
                 </div>
             </div>
         </section>
-
-        <!--About Section-->
+        <!-- About Section -->
         <section id="about" class="about">
             <div class="about-container">
-              <h4 class="about-title">About</h4>
-          
-              <!-- (remove any image block you added here before) -->
-          
-              <div class="about-content">
+            <h4 class="about-title">About</h4>
+            <div class="about-content">
                 <p>At Best Fit Chiropracting, we help you realign your health with expert chiropractic 
-                  care tailored to your lifestyle. Whether you're recovering from injury, struggling from back or neck pain, 
-                  or just need to de-stress from your desk job, our holistic approach is designed to get you moving and feeling better.</p>
-              </div>
-          
-              <div class="btn-secondary">Schedule Your Call Today</div>
+                care tailored to your lifestyle. Whether you're recovering from injury, struggling from back or neck pain, 
+                or just need to de-stress from your desk job, our holistic approach is designed to get you moving and feeling better.</p>
             </div>
-          
-            <!-- Put the image on the OTHER side -->
+            <div class="btn-secondary">Schedule Your Call Today</div>
+            </div>
+        
             <div class="about-picture">
-              <img src="images/chiro-table-vertical.jpg" alt="Black chiropractic table in a clean office">
+                <img class="about-img"
+                src="./images/chiro-table.png"
+                onerror="this.onerror=null; this.src='./images/chiro-table.jpg';"
+                alt="Chiropractic table in the clinic" loading="lazy" decoding="async">           
             </div>
-          </section>
+        </section>
 
         <!--Our Services-->
         <section id="our-services" class="our-services">

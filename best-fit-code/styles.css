@@ -15,6 +15,14 @@ White Hex Code: FFFFFF
 html {
     scroll-behavior: smooth;
 }
+:root{
+    --logo-size: 110px;          /* adjust: 96–128px usually looks great */
+    --ring-grow: 10px;           /* ring slightly larger than logo */
+    --nav-vpad: 12px;            /* vertical padding inside the navbar */
+    --nav-height: calc(var(--logo-size) + (var(--nav-vpad) * 2));
+    --logo-shift-x: 0px;         /* micro-nudge to center spine if needed */
+  }
+  
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -25,16 +33,14 @@ body {
 }
 
 /* Navigation Styles - Enhanced Design 5 Style */
-.navbar {
+.navbar{
     position: fixed;
-    top: 0;
-    width: 100%;
-    background: white;
-    box-shadow: 0 8px 25px rgba(208, 0, 0, 0.89);
-    border-bottom: none;
+    top: 0; left: 0; right: 0;
+    background: #fff;
+    box-shadow: 0 8px 25px rgba(208, 0, 0, 0.25); /* softened a bit */
     z-index: 1000;
-    padding: 1rem 0;
-}
+    padding: 0;                   /* keep height controlled by container */
+  }
 
 .nav-container {
     max-width: 1200px;
@@ -44,52 +50,46 @@ body {
     align-items: center;
     padding: 0 2rem;
 }
-
-.nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #1f2937;
+/* Make the logo a fixed box so the ring centers */
+.nav-logo{
     position: relative;
+    display: inline-block;
+    width: var(--logo-size);
+    height: var(--logo-size);
     cursor: pointer;
-}
+  }
 
-/* Logo container WITHOUT red border */
-.nav-logo.with-image::before {
-    content: '';
-    width: 60px;
-    height: 60px;
-    background: transparent;        /* No background color */
-    background-image: url('/images/Best Fit Logo.png');
-    background-size: contain;       /* Show full logo */
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 15px;
-    border: none;                   /* NO BORDER */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow: none;               /* No shadow initially */
-    transition: all 0.3s ease;
-}
-
-/* Pulse effect with subtle red ring (not blocking logo) */
-.nav-logo::after {
+/* IMPORTANT: kill the old pseudo-element image */
+.nav-logo.with-image::before{
+    content: none !important;
+  }
+  
+/* Show the actual PNG */
+.nav-logo-img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: translateX(var(--logo-shift-x));
+    display: block;
+  }
+  
+/* Pulse ring sized from variables (outline only, no fill) */
+.nav-logo::after{
     content: '';
     position: absolute;
-    left: -3px;
-    top: -3px;
-    width: 66px;
-    height: 66px;
-    border: 2px solid rgba(235, 37, 38, 0.3);  /* Thin, transparent red ring */
-    border-radius: 18px;
+    left: calc(var(--ring-grow) * -0.5);
+    top:  calc(var(--ring-grow) * -0.5);
+    width:  calc(var(--logo-size) + var(--ring-grow));
+    height: calc(var(--logo-size) + var(--ring-grow));
+    border: 1px solid rgba(235, 37, 38, 0.28);
+    border-radius: 20px;
+    background: transparent;
     animation: pulse 2.5s infinite;
     pointer-events: none;
-    background: transparent;        /* Ensure no background */
-}
+  }
+
+  /* Make anchored scrolling land below the fixed navbar */
+section[id] { scroll-margin-top: var(--nav-height); }
 
 @keyframes pulse {
     0% { 
@@ -107,7 +107,16 @@ body {
         opacity: 0;
         border-color: rgba(235, 37, 38, 0.1);
     }
+    
 }
+
+/* Responsive logo size */
+@media (max-width: 768px){
+    .nav-logo{ width: 50px; height: 50px; }
+  }
+  @media (max-width: 480px){
+    .nav-logo{ width: 40px; height: 40px; }
+  }
 
 .nav-menu {
     display: flex;
@@ -237,7 +246,7 @@ body {
 
 /* ABOUT SECTION STYLING */
 .about {
-    background: linear-gradient(135deg, #fef7f7 0%, #f9fafb 100%);
+    background: linear-gradient(135deg, #fff9f9 0%, #f9fafb 100%);
     display: grid;
     grid-template-columns: 1.1fr 1fr; /* text | image */
     align-items: stretch;
@@ -271,14 +280,15 @@ body {
     transform: translateY(-1px); 
     opacity: .95;
 }
-
-.about-picture {
+/* Vertical image panel */
+.about-picture{
     position: relative;
-    min-height: clamp(280px, 48vw, 640px);
+    aspect-ratio: 3 / 4;
+    min-height: clamp(320px, 48vw, 640px);
     border-left: 2px solid #EB2526;
     border-radius: 16px;
-    overflow: hidden; /* clean edges */
-}
+    overflow: hidden;
+  }
 
 .about-title {
     color: black;
@@ -295,37 +305,25 @@ body {
     margin: 0 0 28px;
 }
 
-.about-figure {
-    width: 100%;
-    aspect-ratio: 3 / 4;              /* tall/vertical frame */
-    border-radius: 16px;
-    overflow: hidden;                  /* clean edges, no overflow */
-    box-shadow: 0 10px 30px rgba(0,0,0,.06);
-    margin: 8px 0 20px;               /* space between title and paragraph */
-    background: #eee;                 
-}
-
-.about-figure img {
+/* Make the image fill the frame cleanly */
+.about-picture .about-img{
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* fills area with no loose edges */
+    object-fit: cover;                    /* fills without distortion */
+    object-position: 50% 50%;             /* tweak focus if needed */
     display: block;
-}
+  }
 
-.about-picture img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
+  @media (max-width: 768px){
+    .about-picture{ aspect-ratio: 4 / 5; min-height: 360px; }
+    .about-picture .about-img{ object-position: 50% 40%; }
+  }
 
 /* OUR SERVICES STYLING */
 .our-services {
-    background: linear-gradient(135deg, #fef7f7 0%, #f9fafb 100%);
+    background: linear-gradient(135deg, #fff9f9 0%, #f9fafb 100%);
 }
 
 .our-services-container {
@@ -435,7 +433,7 @@ body {
 /* FIXED CSS FOR FLOATING LABELS */
 #booking.booking {
     padding: 6rem 2rem;
-    background: linear-gradient(135deg, #fef7f7 0%, #f9fafb 100%);
+    background: linear-gradient(135deg, #fff9f9 0%, #f9fafb 100%);
     color: #2c3e50;
     scroll-margin-top: 80px;
     position: relative;
@@ -579,26 +577,6 @@ body {
         left: 0;
     }
 
-    .nav-logo {
-        font-size: 1.5rem;
-        gap: 10px;
-    }
-
-    .nav-logo.with-image::before {
-        width: 50px;
-        height: 50px;
-        background-size: 80%;
-        border-radius: 12px;
-    }
-
-    .nav-logo::after {
-        width: 54px;
-        height: 54px;
-        left: -2px;
-        top: -2px;
-        border-radius: 14px;
-        border-width: 2px;
-    }
 
     .about {
         grid-template-columns: 1fr;
@@ -614,22 +592,13 @@ body {
     }
 }
 
-@media (max-width: 480px) {
-    .nav-logo {
-        font-size: 1.2rem;
-        gap: 8px;
-    }
-
-    .nav-logo.with-image::before {
-        width: 40px;
-        height: 40px;
-        background-size: 75%;
-        border-radius: 10px;
-    }
-
-    .nav-logo::after {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-    }
-}
+/* Responsive: shrink on smaller screens */
+@media (max-width: 1024px){
+    :root{ --logo-size: 96px; }
+  }
+  @media (max-width: 768px){
+    :root{ --logo-size: 56px; --nav-vpad: 10px; }
+  }
+  @media (max-width: 480px){
+    :root{ --logo-size: 44px; --nav-vpad: 8px; }
+  }
