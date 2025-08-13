@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <!--Enables responsive design on phones-->
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Bryce's - Web Portfolio</title>
+        <title>BestFit Chiropractic</title>
         <!--Short summary used by search engines for the snippet-->
         <meta name="description" content="Bryce's professional web development portfolio showcasing modern, clean design and innovative projects." />
         <!--Sets the browser UI color on mobile (address bar, etc.)-->
@@ -21,7 +21,8 @@
         <!--Navgation Header-->
         <nav class="navbar">
             <div class="nav-container">
-                <div class="nav-logo">
+                <div class="nav-logo with-image">
+                    <!-- Logo appears automatically from CSS -->
                     <!--Best Fit Logo code will go here, if we decide to
                     to place logo in the navagation bar-->
                 </div> 
@@ -29,7 +30,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#our-services">Our Services</a></li>
-                    <li><a href="#contact ">Contact</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
                 <div class="hamburger">
                     <span class="bar"></span>
@@ -57,16 +58,24 @@
         <!--About Section-->
         <section id="about" class="about">
             <div class="about-container">
-                <h2 class="about-title">About</h2>
-                <div class="about-content">
-                    <p>Filler Words</p>
-                </div>
-                <div class="btn-secondary">Schedule Your Call Today</div>
+              <h4 class="about-title">About</h4>
+          
+              <!-- (remove any image block you added here before) -->
+          
+              <div class="about-content">
+                <p>At Best Fit Chiropracting, we help you realign your health with expert chiropractic 
+                  care tailored to your lifestyle. Whether you're recovering from injury, struggling from back or neck pain, 
+                  or just need to de-stress from your desk job, our holistic approach is designed to get you moving and feeling better.</p>
+              </div>
+          
+              <div class="btn-secondary">Schedule Your Call Today</div>
             </div>
+          
+            <!-- Put the image on the OTHER side -->
             <div class="about-picture">
-                <!--ADD ABOUT SECTION PICTURE HERE-->
+              <img src="images/chiro-table-vertical.jpg" alt="Black chiropractic table in a clean office">
             </div>
-        </section>
+          </section>
 
         <!--Our Services-->
         <section id="our-services" class="our-services">
@@ -114,24 +123,33 @@
         <section id="booking" class="booking">
             <div class="booking-container">
                 <div class="booking-header">
-                    <h3 class="booking-header">Book Your Call Today</h3>
+                    <h3>Book Your Call Today</h3>
                 </div>
                 <div class="booking-form">
                     <div class="booking-content">
                         <form action="#" method="POST">
-                            <label for="firstname">First Name:</label>
-                            <input type="text" id="firstName" name="firstName" required>
-
-                            <label for="lastName">Last Name:</label>
-                            <input type="text" id="lastName" name="lastName" required>
-
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required>
-
-                            <label for="phone">Phone Number:</label>
-                            <input type="tel" id="phone" name="phone" required>
-
-                            <input type="submit" value="Submit">
+                            
+                            <div class="floating-field">
+                                <input type="text" id="firstName" name="firstName" placeholder=" " required>
+                                <label for="firstName">First Name</label>
+                            </div>
+    
+                            <div class="floating-field">
+                                <input type="text" id="lastName" name="lastName" placeholder=" " required>
+                                <label for="lastName">Last Name</label>
+                            </div>
+    
+                            <div class="floating-field">
+                                <input type="email" id="email" name="email" placeholder=" " required>
+                                <label for="email">Email</label>
+                            </div>
+    
+                            <div class="floating-field">
+                                <input type="tel" id="phone" name="phone" placeholder=" " required>
+                                <label for="phone">Phone Number</label>
+                            </div>
+    
+                            <input type="submit" value="Schedule My Call">
                         </form>
                     </div>
                 </div>
@@ -172,4 +190,4 @@
 
         <!--ADD JAVASCRIPT HERE-->
     </body>
-
+</html>
