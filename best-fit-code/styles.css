@@ -365,7 +365,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
 
 .our-services-title {
     color: #EB2526;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.05;
     font-size: clamp(40px,6.5vw,92px);
@@ -510,7 +510,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
 .service-1-heading,
 .service-2-heading,
 .service-3-heading{
-    padding: 0 clamp(18px, 3vw, 40px);
+    padding: 0 clamp(10px, 2.5vw, 40px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -523,7 +523,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     color: #EB2526;
     font-weight: 600;
     letter-spacing: -0.01em;
-    font-size: clamp(28px, 4.5vw, 48px);
+    font-size: clamp(10px, 3vw, 48px);
     margin: 6px 0 10px;
     text-align: center;
 }
