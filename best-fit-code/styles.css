@@ -544,7 +544,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     margin: 0 auto;
 }
 
-/* BOOKING SECTION - FIXED CSS FOR FLOATING LABELS */
+/* FIXED CSS FOR FLOATING LABELS */
 #booking.booking {
     padding: 6rem 2rem;
     background: linear-gradient(135deg, #fff9f9 0%, #f9fafb 100%);
@@ -613,6 +613,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     min-height: 100px;
 }
 
+/* Make placeholders transparent for both input and textarea */
 .floating-field input::placeholder,
 .floating-field textarea::placeholder {
     color: transparent;
@@ -632,7 +633,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     z-index: 3;
 }
 
-/* FIXED: Floating label animations */
+/* FIXED: Floating label animations for both input and textarea */
 .floating-field input:focus + label,
 .floating-field input.has-value + label,
 .floating-field textarea:focus + label,
