@@ -16,9 +16,9 @@ html {
     scroll-behavior: smooth;
 }
 :root{
-    --logo-size: 150px;          /* Increased from 60px for better visibility */
+    --logo-size: 60px;          /* Reduced from 145px */
     --ring-grow: 0.5px;         
-    --nav-vpad: 8px;            
+    --nav-vpad: 8px;            /* Reduced from 10px */
     --nav-height: calc(var(--logo-size) + (var(--nav-vpad) * 2));
     --logo-shift-x: 0px;        
     --about-focus-x: 85%;   
@@ -55,7 +55,7 @@ body {
     height: var(--nav-height);
 }
 
-/* Make the logo a fixed box */
+/* Make the logo a fixed box so the ring centers */
 .nav-logo{
     position: relative;
     display: inline-block;
@@ -78,24 +78,52 @@ body {
     display: block;
   }
   
-/* REMOVED: Pulse ring animation 
-.nav-logo::after - This entire block has been removed */
+/* Pulse ring sized from variables (outline only, no fill) */
+.nav-logo::after{
+    content: '';
+    position: absolute;
+    left: calc(var(--ring-grow) * -0.5);
+    top:  calc(var(--ring-grow) * -0.5);
+    width:  calc(var(--logo-size) + var(--ring-grow));
+    height: calc(var(--logo-size) + var(--ring-grow));
+    border: 1px solid rgba(235, 37, 38, 0.28);
+    border-radius: 20px;
+    background: transparent;
+    animation: pulse 2.5s infinite;
+    pointer-events: none;
+  }
 
   /* Make anchored scrolling land below the fixed navbar */
 section[id] { scroll-margin-top: var(--nav-height); }
 
-/* REMOVED: Pulse keyframes animation
-@keyframes pulse - This entire block has been removed */
+@keyframes pulse {
+    0% { 
+        transform: scale(1); 
+        opacity: 0.6; 
+        border-color: rgba(235, 37, 38, 0.2);
+    }
+    50% { 
+        transform: scale(1.1); 
+        opacity: 0.4;
+        border-color: rgba(235, 37, 38, 0.3);
+    }
+    100% { 
+        transform: scale(1.2); 
+        opacity: 0;
+        border-color: rgba(235, 37, 38, 0.1);
+    }
+    
+}
 
-/* Update responsive breakpoints - increased sizes for better visibility */
+/* Update responsive breakpoints */
 @media (max-width: 1024px){
-    :root{ --logo-size: 80px; --nav-vpad: 6px; }
+    :root{ --logo-size: 50px; --nav-vpad: 6px; }
 }
 @media (max-width: 768px){
-    :root{ --logo-size: 60px; --nav-vpad: 6px; }
+    :root{ --logo-size: 40px; --nav-vpad: 6px; }
 }
 @media (max-width: 480px){
-    :root{ --logo-size: 50px; --nav-vpad: 5px; }
+    :root{ --logo-size: 35px; --nav-vpad: 5px; }
 }
 
 .nav-menu {
@@ -372,116 +400,6 @@ section[id] { scroll-margin-top: var(--nav-height); }
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.05;
-    font-size: clamp(35px, 6.5vw, 60px);
-    margin: 0;
-}
-
-.testimonial-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.testimonial-item {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(235, 37, 38, 0.1);
-    border: 1px solid rgba(235, 37, 38, 0.1);
-}
-
-.testimonial-item h4 {
-    color: #EB2526;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.testimonial-item p {
-    color: #374151;
-    line-height: 1.6;
-    font-style: italic;
-}
-
-/* FOOTER STYLING */
-.footer {
-    background: #EB2526;
-    color: white;
-    padding: 40px 16px;
-    text-align: center;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer-container p {
-    font-size: 1rem;
-    opacity: 0.9;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 80px;
-        flex-direction: column;
-        background-color: white;
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-        padding: 2rem 0;
-        border-radius: 0 0 20px 20px;
-    }
-
-    .nav-menu.active {
-        left: 0;
-    }
-
-    /* Updated responsive for hero section */
-    .hero-content {
-        text-align: center;
-        padding: 40px 20px;
-    }
-    
-    .hero-picture {
-        min-height: 300px;
-    }
-
-    /* Updated responsive for about section */
-    .about {
-        grid-template-columns: 1fr;
-    }
-    
-    .about-container {
-        order: 1;
-        padding: 40px 20px;
-        text-align: center;
-    }
-    
-    .about-picture {
-        order: 2;
-        min-height: 300px;
-    }
-
-    .services {
-        grid-template-columns: 1fr;
-    }
-
-    .booking-form {
-        padding: 30px 20px;
-    }
-}spacing: -0.02em;
-    line-height: 1.05;
     font-size: clamp(40px,6.5vw,92px);
     margin: 0;
 }
@@ -623,8 +541,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     margin-bottom: 0;
 }
 
-.floating-field input,
-.floating-field textarea {
+.floating-field input {
     width: 100%;
     padding: 18px 20px;
     border: 2px solid rgba(229, 231, 235, 0.8);
@@ -637,14 +554,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     outline: none;
 }
 
-/* Special styling for textarea */
-.floating-field textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-.floating-field input::placeholder,
-.floating-field textarea::placeholder {
+.floating-field input::placeholder {
     color: transparent;
 }
 
@@ -664,9 +574,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
 
 /* FIXED: Floating label animations */
 .floating-field input:focus + label,
-.floating-field input.has-value + label,
-.floating-field textarea:focus + label,
-.floating-field textarea.has-value + label {
+.floating-field input.has-value + label {
     top: -8px;
     left: 15px;
     font-size: 0.85rem;
@@ -677,8 +585,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     box-shadow: 0 2px 8px rgba(235, 37, 38, 0.3);
 }
 
-.floating-field input:focus,
-.floating-field textarea:focus {
+.floating-field input:focus {
     border-color: rgba(235, 37, 38, 0.6);
     background: white;
     box-shadow: 
@@ -723,4 +630,124 @@ section[id] { scroll-margin-top: var(--nav-height); }
 .testimonial-title {
     color: #EB2526;
     font-weight: 700;
-    letter
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-size: clamp(35px, 6.5vw, 60px);
+    margin: 0;
+}
+
+.testimonial-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.testimonial-item {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(235, 37, 38, 0.1);
+    border: 1px solid rgba(235, 37, 38, 0.1);
+}
+
+.testimonial-item h4 {
+    color: #EB2526;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.testimonial-item p {
+    color: #374151;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* FOOTER STYLING */
+.footer {
+    background: #EB2526;
+    color: white;
+    padding: 40px 16px;
+    text-align: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-container p {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 2rem 0;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    /* Updated responsive for hero section */
+    .hero-content {
+        text-align: center;
+        padding: 40px 20px;
+    }
+    
+    .hero-picture {
+        min-height: 300px;
+    }
+
+    /* Updated responsive for about section */
+    .about {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-container {
+        order: 1;
+        padding: 40px 20px;
+        text-align: center;
+    }
+    
+    .about-picture {
+        order: 2;
+        min-height: 300px;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-form {
+        padding: 30px 20px;
+    }
+}
+
+/* Responsive: shrink on smaller screens */
+@media (max-width: 1024px){
+    :root{ --logo-size: 96px; }
+  }
+  @media (max-width: 768px){
+    :root{ --logo-size: 56px; --nav-vpad: 10px; }
+  }
+  @media (max-width: 480px){
+    :root{ --logo-size: 44px; --nav-vpad: 8px; }
