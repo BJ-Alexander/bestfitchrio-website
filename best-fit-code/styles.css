@@ -480,7 +480,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     .booking-form {
         padding: 30px 20px;
     }
-}-spacing: -0.02em;
+}spacing: -0.02em;
     line-height: 1.05;
     font-size: clamp(40px,6.5vw,92px);
     margin: 0;
