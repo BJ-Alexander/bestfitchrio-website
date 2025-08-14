@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Floating label functionality for booking form
-    const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]');
+    // Floating label functionality for booking form - Updated to include textarea
+    const inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], textarea');
     
     inputs.forEach(input => {
         // Check if input has value on page load (for browser auto-fill)
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Form submission handling
+    // Form submission handling - Updated to include message field
     const bookingForm = document.querySelector('#booking form');
     if (bookingForm) {
         bookingForm.addEventListener('submit', function(e) {
@@ -141,15 +141,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const lastName = formData.get('lastName');
             const email = formData.get('email');
             const phone = formData.get('phone');
+            const message = formData.get('message');
             
             // Basic validation
             if (!firstName || !lastName || !email || !phone) {
-                alert('Please fill in all fields.');
+                alert('Please fill in all required fields.');
                 return;
             }
             
             // Success message (replace with actual form submission)
-            alert(`Thank you, ${firstName}! We'll contact you soon at ${email}.`);
+            let successMessage = `Thank you, ${firstName}! We'll contact you soon at ${email}.`;
+            if (message && message.trim() !== '') {
+                successMessage += ` We've received your message about your needs.`;
+            }
+            alert(successMessage);
             
             // Reset form and floating labels
             this.reset();
@@ -159,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add CSS for auto-fill detection
+    // Add CSS for auto-fill detection - Updated to include textarea
     const style = document.createElement('style');
     style.textContent = `
         @keyframes onAutoFillStart {
@@ -167,12 +172,14 @@ document.addEventListener('DOMContentLoaded', function() {
             to { opacity: 1; }
         }
         
-        input:-webkit-autofill {
+        input:-webkit-autofill,
+        textarea:-webkit-autofill {
             animation-name: onAutoFillStart;
             animation-duration: 0.001s;
         }
         
-        input:-webkit-autofill + label {
+        input:-webkit-autofill + label,
+        textarea:-webkit-autofill + label {
             top: -8px !important;
             left: 15px !important;
             font-size: 0.85rem !important;
