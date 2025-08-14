@@ -129,11 +129,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Form submission handling - Updated to include message field
-    const bookingForm = document.querySelector('#booking form');
+    // Form submission handling - Updated for mailto functionality
+    const bookingForm = document.querySelector('#contact-form');
+    const formStatus = document.querySelector('#form-status');
+    const submitButton = document.querySelector('#submit-button');
+    
     if (bookingForm) {
         bookingForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default submission for demo
+            // For mailto, we'll let the form submit naturally but add validation first
             
             // Get form data
             const formData = new FormData(this);
@@ -141,27 +144,92 @@ document.addEventListener('DOMContentLoaded', function() {
             const lastName = formData.get('lastName');
             const email = formData.get('email');
             const phone = formData.get('phone');
-            const message = formData.get('message');
+            const message = formData.get('message') || 'No additional message provided';
             
             // Basic validation
             if (!firstName || !lastName || !email || !phone) {
-                alert('Please fill in all required fields.');
+                e.preventDefault();
+                showFormStatus('Please fill in all required fields.', 'error');
                 return;
             }
             
-            // Success message (replace with actual form submission)
-            let successMessage = `Thank you, ${firstName}! We'll contact you soon at ${email}.`;
-            if (message && message.trim() !== '') {
-                successMessage += ` We've received your message about your needs.`;
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                e.preventDefault();
+                showFormStatus('Please enter a valid email address.', 'error');
+                return;
             }
-            alert(successMessage);
             
-            // Reset form and floating labels
-            this.reset();
-            inputs.forEach(input => {
-                input.classList.remove('has-value', 'focused');
-            });
+            // Phone validation (basic)
+            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+            if (!phoneRegex.test(phone)) {
+                e.preventDefault();
+                showFormStatus('Please enter a valid phone number.', 'error');
+                return;
+            }
+            
+            // For mailto, we need to format the subject and body
+            const subject = encodeURIComponent('New Appointment Request from BestFit Chiropractic');
+            const body = encodeURIComponent(
+                `New Appointment Request\n\n` +
+                `First Name: ${firstName}\n` +
+                `Last Name: ${lastName}\n` +
+                `Email: ${email}\n` +
+                `Phone: ${phone}\n` +
+                `Message: ${message}\n\n` +
+                `Please contact the patient to schedule their appointment.`
+            );
+            
+            // Update the form action with subject and body
+            const emailAddress = 'doctor@bestfitchiropractic.com'; // Replace with actual email
+            this.action = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
+            
+            // Show success message
+            showFormStatus(
+                'Opening your email client to send the appointment request...', 
+                'success'
+            );
+            
+            // Note: The form will now submit naturally and open the email client
+            // After a delay, reset the form
+            setTimeout(() => {
+                // Reset form
+                bookingForm.reset();
+                inputs.forEach(input => {
+                    input.classList.remove('has-value', 'focused');
+                });
+                
+                // Update success message
+                showFormStatus(
+                    'Email client opened! Please send the email to complete your appointment request.', 
+                    'success'
+                );
+                
+                // Hide message after additional time
+                setTimeout(() => {
+                    if (formStatus) {
+                        formStatus.style.display = 'none';
+                    }
+                }, 5000);
+            }, 1000);
         });
+    }
+    
+    // Function to show form status messages
+    function showFormStatus(message, type) {
+        if (formStatus) {
+            formStatus.textContent = message;
+            formStatus.className = `form-status ${type}`;
+            formStatus.style.display = 'block';
+            
+            // Auto-hide error messages after 5 seconds
+            if (type === 'error') {
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 5000);
+            }
+        }
     }
 
     // Add CSS for auto-fill detection - Updated to include textarea

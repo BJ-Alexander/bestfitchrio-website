@@ -139,7 +139,7 @@
                 </div>
         </section>
 
-        <!--Schedule Call Section-->
+<!--Schedule Call Section-->
         <section id="booking" class="booking">
             <div class="booking-container">
                 <div class="booking-header">
@@ -147,7 +147,11 @@
                 </div>
                 <div class="booking-form">
                     <div class="booking-content">
-                        <form action="#" method="POST">
+                        <!-- 
+                        IMPORTANT: Replace doctor@bestfitchiropractic.com with the actual doctor's email address
+                        This will open the user's email client with the form data
+                        -->
+                        <form action="mailto:bestfitchiropractic@gmail.com" method="POST" enctype="text/plain" id="contact-form">
                             
                             <div class="floating-field">
                                 <input type="text" id="firstName" name="firstName" placeholder=" " required>
@@ -173,8 +177,11 @@
                                 <textarea id="message" name="message" placeholder=" " rows="4"></textarea>
                                 <label for="message">Brief Description of Your Needs</label>
                             </div>
+                            
+                            <!-- Form Status Messages -->
+                            <div id="form-status" class="form-status"></div>
     
-                            <input type="submit" value="Schedule My Call">
+                            <input type="submit" value="Schedule My Call" id="submit-button">
                         </form>
                     </div>
                 </div>
