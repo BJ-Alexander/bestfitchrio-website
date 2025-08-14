@@ -16,7 +16,7 @@ html {
     scroll-behavior: smooth;
 }
 :root{
-    --logo-size: 60px;          /* Reduced from 145px */
+    --logo-size: 100px;          /* Reduced from 145px */
     --ring-grow: 0.5px;         
     --nav-vpad: 8px;            /* Reduced from 10px */
     --nav-height: calc(var(--logo-size) + (var(--nav-vpad) * 2));
@@ -78,42 +78,10 @@ body {
     display: block;
   }
   
-/* Pulse ring sized from variables (outline only, no fill) */
-.nav-logo::after{
-    content: '';
-    position: absolute;
-    left: calc(var(--ring-grow) * -0.5);
-    top:  calc(var(--ring-grow) * -0.5);
-    width:  calc(var(--logo-size) + var(--ring-grow));
-    height: calc(var(--logo-size) + var(--ring-grow));
-    border: 1px solid rgba(235, 37, 38, 0.28);
-    border-radius: 20px;
-    background: transparent;
-    animation: pulse 2.5s infinite;
-    pointer-events: none;
-  }
 
   /* Make anchored scrolling land below the fixed navbar */
 section[id] { scroll-margin-top: var(--nav-height); }
 
-@keyframes pulse {
-    0% { 
-        transform: scale(1); 
-        opacity: 0.6; 
-        border-color: rgba(235, 37, 38, 0.2);
-    }
-    50% { 
-        transform: scale(1.1); 
-        opacity: 0.4;
-        border-color: rgba(235, 37, 38, 0.3);
-    }
-    100% { 
-        transform: scale(1.2); 
-        opacity: 0;
-        border-color: rgba(235, 37, 38, 0.1);
-    }
-    
-}
 
 /* Update responsive breakpoints */
 @media (max-width: 1024px){
@@ -535,13 +503,16 @@ section[id] { scroll-margin-top: var(--nav-height); }
     text-align: left;
 }
 
+
 /* FIXED: Create proper floating field containers */
 .floating-field {
     position: relative;
     margin-bottom: 0;
 }
 
-.floating-field input {
+
+.floating-field input,
+.floating-field textarea {
     width: 100%;
     padding: 18px 20px;
     border: 2px solid rgba(229, 231, 235, 0.8);
@@ -553,6 +524,13 @@ section[id] { scroll-margin-top: var(--nav-height); }
     font-family: inherit;
     outline: none;
 }
+
+/* Special styling for textarea */
+.floating-field textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
 
 .floating-field input::placeholder {
     color: transparent;
