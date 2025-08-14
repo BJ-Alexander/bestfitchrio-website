@@ -538,7 +538,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
 .service-1-content p,
 .service-2-content p,
 .service-3-content p{
-    color: #EB2526;
+    color: #000000;
     line-height: 1.85;
     max-width: 48ch;
     margin: 0 auto;
