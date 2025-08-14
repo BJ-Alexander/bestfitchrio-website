@@ -16,7 +16,7 @@ html {
     scroll-behavior: smooth;
 }
 :root{
-    --logo-size: 60px;          
+    --logo-size: 100px;          
     --ring-grow: 0.5px;         
     --nav-vpad: 8px;            
     --nav-height: calc(var(--logo-size) + (var(--nav-vpad) * 2));
@@ -77,41 +77,11 @@ body {
     display: block;
   }
   
-/* Pulse ring sized from variables (outline only, no fill) */
-.nav-logo::after{
-    content: '';
-    position: absolute;
-    left: calc(var(--ring-grow) * -0.5);
-    top:  calc(var(--ring-grow) * -0.5);
-    width:  calc(var(--logo-size) + var(--ring-grow));
-    height: calc(var(--logo-size) + var(--ring-grow));
-    border: 1px solid rgba(235, 37, 38, 0.28);
-    border-radius: 20px;
-    background: transparent;
-    animation: pulse 2.5s infinite;
-    pointer-events: none;
-  }
+
 
 /* Make anchored scrolling land below the fixed navbar */
 section[id] { scroll-margin-top: var(--nav-height); }
 
-@keyframes pulse {
-    0% { 
-        transform: scale(1); 
-        opacity: 0.6; 
-        border-color: rgba(235, 37, 38, 0.2);
-    }
-    50% { 
-        transform: scale(1.1); 
-        opacity: 0.4;
-        border-color: rgba(235, 37, 38, 0.3);
-    }
-    100% { 
-        transform: scale(1.2); 
-        opacity: 0;
-        border-color: rgba(235, 37, 38, 0.1);
-    }
-}
 
 /* Update responsive breakpoints */
 @media (max-width: 1024px){
