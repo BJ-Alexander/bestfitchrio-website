@@ -267,6 +267,29 @@
                                     <label for="message">Brief Description of Your Needs (Optional)</label>
                                     <div id="message-help" class="sr-only">Tell us about your pain, symptoms, or health goals</div>
                                 </div>
+
+                                <!-- Body Area Checkboxes -->
+                                <fieldset class="checkbox-fieldset">
+                                    <legend>Areas of Concern (Select all that apply)</legend>
+                                    <div class="checkbox-grid">
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="neck" name="bodyAreas" value="Neck">
+                                            <label for="neck">Neck</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="back" name="bodyAreas" value="Back">
+                                            <label for="back">Back</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="upper-extremity" name="bodyAreas" value="Upper-body extremity">
+                                            <label for="upper-extremity">Upper-body extremity</label>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="lower-extremity" name="bodyAreas" value="Lower-body extremity">
+                                            <label for="lower-extremity">Lower-body extremity</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
                                 
                                 <!-- Form Status Messages with ARIA live region -->
                                 <div id="form-status" class="form-status" role="status" aria-live="polite" aria-atomic="true"></div>

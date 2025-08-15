@@ -1,4 +1,3 @@
-
 /* Color Scheme : Red Black White  
 Red Hex Code: EB2526
 Black Hex Code: 000000
@@ -255,8 +254,9 @@ section[id] { scroll-margin-top: var(--nav-height); }
 
 .hero-mini-title {
     color: #EB2526;
-    font-size: clamp(16px, 1.6vw, 20px);
+    font-size: clamp(14px, 1.6vw, 20px);
     margin: 0 0 12px;
+    font-weight: 500;
 }
 
 .hero-title {
@@ -879,7 +879,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     z-index: 2;
 }
 
-.booking-header h3 {
+.booking-header h2 {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 20px;
@@ -996,6 +996,60 @@ section[id] { scroll-margin-top: var(--nav-height); }
     box-shadow: 0 15px 35px rgba(235, 37, 38, 0.3);
 }
 
+/* Checkbox fieldset styling */
+.checkbox-fieldset {
+    border: 2px solid rgba(235, 37, 38, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.checkbox-fieldset legend {
+    color: #EB2526;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0 10px;
+    margin-bottom: 15px;
+}
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #EB2526;
+    cursor: pointer;
+}
+
+.checkbox-item label {
+    color: #374151;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.95rem;
+    position: static;
+    top: auto;
+    left: auto;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transition: color 0.3s ease;
+}
+
+.checkbox-item label:hover {
+    color: #EB2526;
+}
+
 /* Form status messages */
 .form-status {
     padding: 10px;
@@ -1095,7 +1149,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: 80px;
+        top: var(--nav-height);
         flex-direction: column;
         background-color: white;
         width: 100%;
@@ -1104,31 +1158,46 @@ section[id] { scroll-margin-top: var(--nav-height); }
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
         padding: 2rem 0;
         border-radius: 0 0 20px 20px;
+        z-index: 999;
     }
 
     .nav-menu.active {
         left: 0;
     }
 
-    /* Updated responsive for hero section */
+    /* Mobile hero fixes */
     .hero-content {
         text-align: center;
-        padding: 40px 20px;
+        padding: clamp(40px, 8vw, 60px) 16px 32px;
+    }
+    
+    .hero-title {
+        font-size: clamp(32px, 8vw, 48px);
+        line-height: 1.1;
+    }
+    
+    .hero-mini-title {
+        font-size: clamp(12px, 4vw, 16px);
     }
     
     .hero-picture {
-        min-height: 300px;
+        min-height: 250px;
+        height: clamp(200px, 35vw, 350px);
     }
 
-    /* Updated responsive for about section */
+    /* Mobile about section fixes */
     .about {
         grid-template-columns: 1fr;
     }
     
     .about-container {
         order: 1;
-        padding: 40px 20px;
+        padding: clamp(40px, 8vw, 60px) 20px;
         text-align: center;
+    }
+    
+    .about-title {
+        font-size: clamp(28px, 8vw, 40px);
     }
     
     .about-picture {
@@ -1136,49 +1205,147 @@ section[id] { scroll-margin-top: var(--nav-height); }
         min-height: 300px;
     }
 
-    /* Updated responsive for 6 services */
-    .services {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(18, auto); /* 6 services × 3 elements each */
+    /* Mobile services fixes */
+    .our-services {
+        padding: clamp(40px, 8vw, 60px) 16px;
+    }
+    
+    .our-services-title {
+        font-size: clamp(28px, 8vw, 40px);
+        margin-bottom: 30px;
     }
 
-    /* Mobile: stack all services vertically */
-    .service-1-container{ grid-column:1; grid-row:1; }
+    .services {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(18, auto);
+        padding: 20px 0;
+        /* Mobile: remove complex borders, use simple ones */
+        background: 
+            linear-gradient(#EB2526 0 0) 0 0/100% 1px no-repeat,
+            linear-gradient(#EB2526 0 0) 0 100%/100% 1px no-repeat,
+            linear-gradient(#EB2526 0 0) 0 0/1px 100% no-repeat,
+            linear-gradient(#EB2526 0 0) 100% 0/1px 100% no-repeat;
+    }
+
+    /* Mobile: stack all services vertically with borders between */
+    .service-1-container{ grid-column:1; grid-row:1; padding-top: 20px; }
     .service-1-heading{ grid-column:1; grid-row:2; }
-    .service-1-content{ grid-column:1; grid-row:3; }
+    .service-1-content{ grid-column:1; grid-row:3; padding-bottom: 20px; border-bottom: 1px solid #EB2526; }
 
-    .service-2-container{ grid-column:1; grid-row:4; }
+    .service-2-container{ grid-column:1; grid-row:4; padding-top: 20px; }
     .service-2-heading{ grid-column:1; grid-row:5; }
-    .service-2-content{ grid-column:1; grid-row:6; }
+    .service-2-content{ grid-column:1; grid-row:6; padding-bottom: 20px; border-bottom: 1px solid #EB2526; }
 
-    .service-3-container{ grid-column:1; grid-row:7; }
+    .service-3-container{ grid-column:1; grid-row:7; padding-top: 20px; }
     .service-3-heading{ grid-column:1; grid-row:8; }
-    .service-3-content{ grid-column:1; grid-row:9; }
+    .service-3-content{ grid-column:1; grid-row:9; padding-bottom: 20px; border-bottom: 1px solid #EB2526; }
 
-    .service-4-container{ grid-column:1; grid-row:10; }
+    .service-4-container{ grid-column:1; grid-row:10; padding-top: 20px; }
     .service-4-heading{ grid-column:1; grid-row:11; }
-    .service-4-content{ grid-column:1; grid-row:12; }
+    .service-4-content{ grid-column:1; grid-row:12; padding-bottom: 20px; border-bottom: 1px solid #EB2526; }
 
-    .service-5-container{ grid-column:1; grid-row:13; }
+    .service-5-container{ grid-column:1; grid-row:13; padding-top: 20px; }
     .service-5-heading{ grid-column:1; grid-row:14; }
-    .service-5-content{ grid-column:1; grid-row:15; }
+    .service-5-content{ grid-column:1; grid-row:15; padding-bottom: 20px; border-bottom: 1px solid #EB2526; }
 
-    .service-6-container{ grid-column:1; grid-row:16; }
+    .service-6-container{ grid-column:1; grid-row:16; padding-top: 20px; }
     .service-6-heading{ grid-column:1; grid-row:17; }
-    .service-6-content{ grid-column:1; grid-row:18; }
+    .service-6-content{ grid-column:1; grid-row:18; padding-bottom: 20px; }
 
+    /* Mobile service content adjustments */
+    .service-1-content,
+    .service-2-content,
+    .service-3-content,
+    .service-4-content,
+    .service-5-content,
+    .service-6-content {
+        padding: 0 20px 20px;
+    }
+
+    .service-1-title,
+    .service-2-title,
+    .service-3-title,
+    .service-4-title,
+    .service-5-title,
+    .service-6-title {
+        font-size: clamp(16px, 5vw, 20px);
+        margin: 10px 0;
+    }
+
+    /* Mobile booking form fixes */
+    .booking {
+        padding: clamp(40px, 8vw, 60px) 16px;
+    }
+    
+    .booking-header h2 {
+        font-size: clamp(24px, 8vw, 32px);
+    }
+    
     .booking-form {
         padding: 30px 20px;
+        border-radius: 20px;
+    }
+
+    /* Mobile checkbox grid */
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* Mobile testimonials */
+    .testimonials {
+        padding: clamp(40px, 8vw, 60px) 16px;
+    }
+    
+    .testimonial-title {
+        font-size: clamp(24px, 8vw, 32px);
+    }
+    
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Additional mobile breakpoint for very small screens */
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 30px 16px 24px;
+    }
+    
+    .hero-title {
+        font-size: clamp(24px, 9vw, 36px);
+    }
+    
+    .about-container,
+    .our-services,
+    .booking,
+    .testimonials {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    .booking-form {
+        padding: 20px 16px;
+    }
+    
+    .service-1-content,
+    .service-2-content,
+    .service-3-content,
+    .service-4-content,
+    .service-5-content,
+    .service-6-content {
+        padding: 0 16px 16px;
     }
 }
 
 /* Responsive: shrink on smaller screens */
 @media (max-width: 1024px){
     :root{ --logo-size: 96px; }
-  }
-  @media (max-width: 768px){
+}
+@media (max-width: 768px){
     :root{ --logo-size: 56px; --nav-vpad: 10px; }
-  }
-  @media (max-width: 480px){
+}
+@media (max-width: 480px){
     :root{ --logo-size: 44px; --nav-vpad: 8px; }
-  }
+}
