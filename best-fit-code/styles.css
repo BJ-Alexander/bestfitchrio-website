@@ -1,3 +1,4 @@
+
 /* Color Scheme : Red Black White  
 Red Hex Code: EB2526
 Black Hex Code: 000000
@@ -349,6 +350,76 @@ section[id] { scroll-margin-top: var(--nav-height); }
     .about-picture{ aspect-ratio: 4 / 5; min-height: 360px; }
     .about-picture .about-img{ object-position: 50% 40%; }
   }
+
+/* SECTION DIVIDERS */
+.section-divider {
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
+    margin: 0;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Add divider before our-services */
+.our-services::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
+    margin: 0 0 clamp(40px, 6vw, 80px) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.our-services::before::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    animation: shimmer 3s infinite;
+}
+
+/* Add divider before booking */
+.booking::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
+    margin: 0 0 clamp(40px, 6vw, 80px) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add divider before testimonials */
+.testimonials::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
+    margin: 0 0 clamp(40px, 6vw, 80px) 0;
+    position: relative;
+    overflow: hidden;
+}
 
 /* OUR SERVICES STYLING - Updated for 6 services in 2 rows with proper spacing */
 .our-services {
