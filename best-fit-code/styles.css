@@ -350,7 +350,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     .about-picture .about-img{ object-position: 50% 40%; }
   }
 
-/* OUR SERVICES STYLING - Updated for 6 services in 2 rows */
+/* OUR SERVICES STYLING - Updated for 6 services in 2 rows with proper spacing */
 .our-services {
     background: linear-gradient(135deg, #fff9f9 0%, #f9fafb 100%);
     padding: clamp(56px, 7vw, 96px) 16px;
@@ -364,7 +364,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
 }
 
 .our-services-title {
-    color: #EB2526;
+    color: rgb(235, 37, 38);
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.05;
@@ -393,30 +393,90 @@ section[id] { scroll-margin-top: var(--nav-height); }
 }
 
 /* TOP ROW - SERVICES 1-3 */
-.service-1-container{ grid-column:1; grid-row:1; }
-.service-1-heading{ grid-column:1; grid-row:2; }
-.service-1-content{ grid-column:1; grid-row:3; }
+.service-1-container{ 
+    grid-column:1; 
+    grid-row:1; 
+    padding-top: clamp(20px, 3vw, 30px);
+}
+.service-1-heading{ 
+    grid-column:1; 
+    grid-row:2; 
+}
+.service-1-content{ 
+    grid-column:1; 
+    grid-row:3; 
+}
 
-.service-2-container{ grid-column:2; grid-row:1; }
-.service-2-heading{ grid-column:2; grid-row:2; }
-.service-2-content{ grid-column:2; grid-row:3; }
+.service-2-container{ 
+    grid-column:2; 
+    grid-row:1; 
+    padding-top: clamp(20px, 3vw, 30px);
+}
+.service-2-heading{ 
+    grid-column:2; 
+    grid-row:2; 
+}
+.service-2-content{ 
+    grid-column:2; 
+    grid-row:3; 
+}
 
-.service-3-container{ grid-column:3; grid-row:1; }
-.service-3-heading{ grid-column:3; grid-row:2; }
-.service-3-content{ grid-column:3; grid-row:3; }
+.service-3-container{ 
+    grid-column:3; 
+    grid-row:1; 
+    padding-top: clamp(20px, 3vw, 30px);
+}
+.service-3-heading{ 
+    grid-column:3; 
+    grid-row:2; 
+}
+.service-3-content{ 
+    grid-column:3; 
+    grid-row:3; 
+}
 
-/* BOTTOM ROW - SERVICES 4-6 */
-.service-4-container{ grid-column:1; grid-row:4; }
-.service-4-heading{ grid-column:1; grid-row:5; }
-.service-4-content{ grid-column:1; grid-row:6; }
+/* BOTTOM ROW - SERVICES 4-6 with matching top spacing */
+.service-4-container{ 
+    grid-column:1; 
+    grid-row:4; 
+    padding-top: clamp(20px, 3vw, 30px);
+}
+.service-4-heading{ 
+    grid-column:1; 
+    grid-row:5; 
+}
+.service-4-content{ 
+    grid-column:1; 
+    grid-row:6; 
+}
 
-.service-5-container{ grid-column:2; grid-row:4; }
-.service-5-heading{ grid-column:2; grid-row:5; }
-.service-5-content{ grid-column:2; grid-row:6; }
+.service-5-container{ 
+    grid-column:2; 
+    grid-row:4; 
+    padding-top: clamp(20px, 3vw, 30px);
+}
+.service-5-heading{ 
+    grid-column:2; 
+    grid-row:5; 
+}
+.service-5-content{ 
+    grid-column:2; 
+    grid-row:6; 
+}
 
-.service-6-container{ grid-column:3; grid-row:4; }
-.service-6-heading{ grid-column:3; grid-row:5; }
-.service-6-content{ grid-column:3; grid-row:6; }
+.service-6-container{ 
+    grid-column:3; 
+    grid-row:4; 
+    padding-top: clamp(20px, 3vw, 30px);
+}
+.service-6-heading{ 
+    grid-column:3; 
+    grid-row:5; 
+}
+.service-6-content{ 
+    grid-column:3; 
+    grid-row:6; 
+}
 
 /* Updated Service Icons - All 6 services */
 .service-1-logo,
@@ -524,29 +584,28 @@ section[id] { scroll-margin-top: var(--nav-height); }
 /* Service 4 - Cupping Icon */
 .service-4-logo::before {
     content: '';
-    width: 16px;
-    height: 12px;
+    width: 12px;
+    height: 8px;
     background: white;
-    border-radius: 50% 50% 0 0;
+    border-radius: 6px 6px 2px 2px;
     position: absolute;
-    top: 18px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 14px;
+    left: 16px;
+    transform: rotate(-15deg);
 }
 
 .service-4-logo::after {
-    content: '';
-    width: 10px;
+   content: '';
+    width: 12px;
     height: 8px;
     background: white;
-    border-radius: 50% 50% 0 0;
+    border-radius: 6px 6px 2px 2px;
     position: absolute;
-    bottom: 18px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 14px;
+    right: 16px;
+    transform: rotate(15deg);
     box-shadow: 
-        -12px -2px 0 -2px white,
-        12px -2px 0 -2px white;
+        -6px -12px 0 -2px white;
 }
 
 /* Service 5 - Dry Needling Icon */
