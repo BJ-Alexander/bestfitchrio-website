@@ -12,6 +12,78 @@ White Hex Code: FFFFFF
     box-sizing: border-box;
 }
 
+/* ACCESSIBILITY STYLES */
+/* Skip link for screen readers */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #EB2526;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    z-index: 9999;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Screen reader only text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Error message styles */
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 4px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+/* Focus indicators for better keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+.hamburger:focus {
+    outline: 3px solid #EB2526;
+    outline-offset: 2px;
+}
+
+/* High contrast focus for navigation */
+.nav-menu a:focus {
+    background: rgba(235, 37, 38, 0.2);
+    outline: 2px solid #fff;
+}
+
+/* Improve button accessibility */
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
 /* SCROLL BEHAVIOR */
 html {
     scroll-behavior: smooth;
@@ -182,7 +254,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
 }
 
 .hero-mini-title {
-    color: black;
+    color: #EB2526;
     font-size: clamp(16px, 1.6vw, 20px);
     margin: 0 0 12px;
 }
@@ -312,6 +384,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     height: 200px;
     border-radius: 16px;
     object-fit: cover;
+    object-position: center 20%;
     border: 4px solid #EB2526;
     box-shadow: 0 8px 25px rgba(235, 37, 38, 0.2);
 }
@@ -982,7 +1055,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
     border: 1px solid rgba(235, 37, 38, 0.1);
 }
 
-.testimonial-item h4 {
+.testimonial-item h3 {
     color: #EB2526;
     font-size: 1.3rem;
     font-weight: 600;
