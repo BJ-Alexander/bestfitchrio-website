@@ -38,7 +38,7 @@ body {
 .navbar{
     position: fixed;
     top: 0; left: 0; right: 0;
-    background: #fff;
+    background: black;
     box-shadow: 0 8px 25px rgba(208, 0, 0, 0.25);
     z-index: 1000;
     padding: 0;                   
@@ -102,7 +102,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
 
 .nav-menu li a {
     text-decoration: none;
-    color: #374151;
+    color: #fff;
     font-weight: 500;
     transition: all 0.3s ease;
     position: relative;
@@ -165,7 +165,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
 /* HERO SECTION */
 .hero {
     margin-top: var(--nav-height);
-    background: white;
+    background: #fff;
 }
 
 .hero-content {
