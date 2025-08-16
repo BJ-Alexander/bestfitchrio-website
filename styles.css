@@ -1,866 +1,3 @@
-/* Color Scheme : Red Black White  
-Red Hex Code: EB2526
-Black Hex Code: 000000
-White Hex Code: FFFFFF
-*/
-
-/*Universal Selector*/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* ACCESSIBILITY STYLES */
-/* Skip link for screen readers */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 6px;
-    background: #EB2526;
-    color: white;
-    padding: 8px;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 600;
-    z-index: 9999;
-    transition: top 0.3s;
-}
-
-.skip-link:focus {
-    top: 6px;
-}
-
-/* Screen reader only text */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* Error message styles */
-.error-message {
-    color: #dc2626;
-    font-size: 0.875rem;
-    margin-top: 4px;
-    display: none;
-}
-
-.error-message.show {
-    display: block;
-}
-
-/* Focus indicators for better keyboard navigation */
-a:focus,
-button:focus,
-input:focus,
-textarea:focus,
-.hamburger:focus {
-    outline: 3px solid #EB2526;
-    outline-offset: 2px;
-}
-
-/* High contrast focus for navigation */
-.nav-menu a:focus {
-    background: rgba(235, 37, 38, 0.2);
-    outline: 2px solid #fff;
-}
-
-/* Improve button accessibility */
-button {
-    cursor: pointer;
-    font-family: inherit;
-}
-
-button:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-/* SCROLL BEHAVIOR */
-html {
-    scroll-behavior: smooth;
-}
-:root{
-    --logo-size: 100px;          
-    --ring-grow: 0.5px;         
-    --nav-vpad: 8px;            
-    --nav-height: calc(var(--logo-size) + (var(--nav-vpad) * 2));
-    --logo-shift-x: 0px;        
-    --about-focus-x: 85%;   
-    --about-focus-y: 50%;
-}
-  
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #fef7f7 0%, #f9fafb 100%);
-    min-height: 100vh;
-}
-
-/* Navigation Styles - Enhanced Design 5 Style */
-.navbar{
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: black;
-    box-shadow: 0 8px 25px rgba(208, 0, 0, 0.25);
-    z-index: 1000;
-    padding: 0;                   
-  }
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--nav-vpad) 2rem;
-    height: var(--nav-height);
-}
-
-/* Make the logo a fixed box so the ring centers */
-.nav-logo{
-    position: relative;
-    display: inline-block;
-    width: var(--logo-size);
-    height: var(--logo-size);
-    cursor: pointer;
-  }
-
-/* IMPORTANT: kill the old pseudo-element image */
-.nav-logo.with-image::before{
-    content: none !important;
-  }
-  
-/* Show the actual PNG */
-.nav-logo-img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transform: translateX(var(--logo-shift-x));
-    display: block;
-  }
-  
-
-
-/* Make anchored scrolling land below the fixed navbar */
-section[id] { scroll-margin-top: var(--nav-height); }
-
-
-/* Update responsive breakpoints */
-@media (max-width: 1024px){
-    :root{ --logo-size: 50px; --nav-vpad: 6px; }
-}
-@media (max-width: 768px){
-    :root{ --logo-size: 40px; --nav-vpad: 6px; }
-}
-@media (max-width: 480px){
-    :root{ --logo-size: 35px; --nav-vpad: 5px; }
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-menu li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    position: relative;
-    padding: 8px 16px;
-    border-radius: 8px;
-}
-
-.nav-menu li a:hover,
-.nav-menu li a.active {
-    color: #EB2526;
-    background: rgba(235, 37, 38, 0.05);
-}
-
-.nav-menu li a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background: #EB2526;
-    transition: width 0.3s ease;
-    border-radius: 1px;
-}
-
-.nav-menu li a:hover::after,
-.nav-menu li a.active::after {
-    width: 80%;
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 5px;
-}
-
-.hamburger .bar {
-    width: 25px;
-    height: 3px;
-    background: #333;
-    margin: 3px 0;
-    transition: 0.3s;
-}
-
-/* Hamburger animation when active */
-.hamburger.active .bar:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.hamburger.active .bar:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active .bar:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-}
-
-/* HERO SECTION */
-.hero {
-    margin-top: var(--nav-height);
-    background: #fff;
-}
-
-.hero-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: clamp(64px, 10vw, 140px) 16px 48px;
-    text-align: center;
-    overflow: visible;
-}
-
-.hero-button { 
-    margin-top: 8px;
-}
-
-.hero-mini-title {
-    color: #EB2526;
-    font-size: clamp(14px, 1.6vw, 20px);
-    margin: 0 0 12px;
-    font-weight: 500;
-}
-
-.hero-title {
-    color: black;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    font-size: clamp(40px, 7vw, 90px);
-    margin: 0 0 24px;
-}
-
-.btn-primary {
-    display: inline-block;
-    padding: 14px 28px;
-    border-radius: 99px;
-    background: #EB2526;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    box-shadow: 0 6px 20px rgba(235, 37, 38, .2);
-    transition: transform .15s ease, opacity .15s ease;
-}
-
-.btn-primary:hover{ 
-    transform: translateY(-1px); 
-    opacity: .95;
-}
-
-/* Image strip directly UNDER the hero copy, full-bleed across page */
-.hero-picture {
-    margin-top: 40px;
-    height: clamp(260px, 42vw, 560px);
-    background: linear-gradient(135deg, #EB2526 0%, #dc2626 100%);
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-    font-weight: 600;
-}
-
-.hero-picture .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero-picture::after {
-    content: "";
-}
-
-/* ABOUT SECTION STYLING - Updated to match layout */
-.about {
-    background: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: stretch;
-    gap: 0;
-    max-width: none;
-    margin: 0;
-    padding: 0;
-}
-
-.about-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: clamp(60px, 8vw, 120px) clamp(60px, 10vw, 150px);
-    background: linear-gradient(135deg, #fff9f9 0%, #f9fafb 100%);
-    order: 1;
-    text-align: center;
-    width: 100%;
-}
-
-.btn-secondary {
-    display: inline-block;
-    padding: 18px 36px;
-    border-radius: 999px;
-    background: #EB2526;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    box-shadow: 0 6px 20px rgba(235, 37, 38, .2);
-    transition: transform .15s ease, opacity .15s ease;
-    cursor: pointer;
-    width: fit-content;
-    margin: 32px auto 0;
-    font-size: 1.1rem;
-}
-
-.btn-secondary:hover { 
-    transform: translateY(-1px); 
-    opacity: .95;
-}
-
-/* Updated about picture for side-by-side layout */
-.about-picture{
-    position: relative;
-    min-height: 500px;
-    overflow: hidden;
-    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-    order: 2;
-  }
-
-.about-title {
-    color: black;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    font-size: clamp(35px, 6.5vw, 60px);
-    margin: 0 0 32px;
-    text-align: center;
-}
-
-.about-headshot {
-    margin-bottom: 40px;
-    display: flex;
-    justify-content: center;
-}
-
-.headshot-img {
-    width: 200px;
-    height: 200px;
-    border-radius: 16px;
-    object-fit: cover;
-    object-position: center 20%;
-    border: 4px solid #EB2526;
-    box-shadow: 0 8px 25px rgba(235, 37, 38, 0.2);
-}
-
-.about .about-content p{
-    color: black;
-    max-width: none;
-    margin: 0 0 40px;
-    line-height: 1.7;
-    font-size: 1.2rem;
-    text-align: center;
-}
-
-.about-picture .about-img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: var(--about-focus-x) var(--about-focus-y);
-  }
-
-.about-picture::after {
-    content: "Professional Chiropractic Care";
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 600;
-}
-
-@media (max-width: 768px){
-    .about-picture{ aspect-ratio: 4 / 5; min-height: 360px; }
-    .about-picture .about-img{ object-position: 50% 40%; }
-  }
-
-/* SECTION DIVIDERS */
-.section-divider {
-    height: 3px;
-    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
-    margin: 0;
-    border: none;
-    position: relative;
-    overflow: hidden;
-}
-
-.section-divider::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
-    animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-    0% { left: -100%; }
-    100% { left: 100%; }
-}
-
-/* Add divider before our-services */
-.our-services::before {
-    content: '';
-    display: block;
-    height: 3px;
-    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
-    margin: 0 0 clamp(40px, 6vw, 80px) 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.our-services::before::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
-    animation: shimmer 3s infinite;
-}
-
-/* Add divider before booking */
-.booking::before {
-    content: '';
-    display: block;
-    height: 3px;
-    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
-    margin: 0 0 clamp(40px, 6vw, 80px) 0;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Add divider before testimonials */
-.testimonials::before {
-    content: '';
-    display: block;
-    height: 3px;
-    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
-    margin: 0 0 clamp(40px, 6vw, 80px) 0;
-    position: relative;
-    overflow: hidden;
-}
-
-/* OUR SERVICES STYLING - Updated for 6 services in 2 rows with proper spacing */
-.our-services {
-    background: linear-gradient(135deg, #fff9f9 0%, #f9fafb 100%);
-    padding: clamp(56px, 7vw, 96px) 16px;
-}
-
-.our-services-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.our-services-title {
-    color: rgb(235, 37, 38);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
-    font-size: clamp(40px,6.5vw,92px);
-    margin: 0;
-}
-
-.services {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0,1fr));
-    grid-template-rows: repeat(6, auto); /* 6 rows: icon1, title1, content1, icon2, title2, content2 */
-    gap: 0;
-    text-align: center;
-    padding: clamp(28px, 4vw, 40px) 0;
-    /* Outer border + vertical dividers + horizontal divider */
-    background:
-        linear-gradient(#EB2526 0 0) 33.333% 0/1px 100% no-repeat,
-        linear-gradient(#EB2526 0 0) 66.666% 0/1px 100% no-repeat,
-        linear-gradient(#EB2526 0 0) 0 50%/100% 1px no-repeat,     /* horizontal divider */
-        linear-gradient(#EB2526 0 0) 0 0/100% 1px no-repeat,        /* top */
-        linear-gradient(#EB2526 0 0) 0 100%/100% 1px no-repeat,    /* bottom */
-        linear-gradient(#EB2526 0 0) 0 0/1px 100% no-repeat,       /* left */
-        linear-gradient(#EB2526 0 0) 100% 0/1px 100% no-repeat;    /* right */
-}
-
-/* TOP ROW - SERVICES 1-3 */
-.service-1-container{ 
-    grid-column:1; 
-    grid-row:1; 
-    padding-top: clamp(20px, 3vw, 30px);
-}
-.service-1-heading{ 
-    grid-column:1; 
-    grid-row:2; 
-}
-.service-1-content{ 
-    grid-column:1; 
-    grid-row:3; 
-}
-
-.service-2-container{ 
-    grid-column:2; 
-    grid-row:1; 
-    padding-top: clamp(20px, 3vw, 30px);
-}
-.service-2-heading{ 
-    grid-column:2; 
-    grid-row:2; 
-}
-.service-2-content{ 
-    grid-column:2; 
-    grid-row:3; 
-}
-
-.service-3-container{ 
-    grid-column:3; 
-    grid-row:1; 
-    padding-top: clamp(20px, 3vw, 30px);
-}
-.service-3-heading{ 
-    grid-column:3; 
-    grid-row:2; 
-}
-.service-3-content{ 
-    grid-column:3; 
-    grid-row:3; 
-}
-
-/* BOTTOM ROW - SERVICES 4-6 with matching top spacing */
-.service-4-container{ 
-    grid-column:1; 
-    grid-row:4; 
-    padding-top: clamp(20px, 3vw, 30px);
-}
-.service-4-heading{ 
-    grid-column:1; 
-    grid-row:5; 
-}
-.service-4-content{ 
-    grid-column:1; 
-    grid-row:6; 
-}
-
-.service-5-container{ 
-    grid-column:2; 
-    grid-row:4; 
-    padding-top: clamp(20px, 3vw, 30px);
-}
-.service-5-heading{ 
-    grid-column:2; 
-    grid-row:5; 
-}
-.service-5-content{ 
-    grid-column:2; 
-    grid-row:6; 
-}
-
-.service-6-container{ 
-    grid-column:3; 
-    grid-row:4; 
-    padding-top: clamp(20px, 3vw, 30px);
-}
-.service-6-heading{ 
-    grid-column:3; 
-    grid-row:5; 
-}
-.service-6-content{ 
-    grid-column:3; 
-    grid-row:6; 
-}
-
-/* Updated Service Icons - All 6 services */
-.service-1-logo,
-.service-2-logo,
-.service-3-logo,
-.service-4-logo,
-.service-5-logo,
-.service-6-logo{
-    width: 56px; 
-    height: 56px;
-    margin: 8px auto 14px;
-    border-radius: 50%;
-    background: #EB2526;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-/* Service 1 - Chiropractic Adjustments Icon */
-.service-1-logo::before {
-    content: '';
-    width: 4px;
-    height: 28px;
-    background: white;
-    border-radius: 2px;
-    position: relative;
-    z-index: 2;
-}
-
-.service-1-logo::after {
-    content: '';
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    background: white;
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 
-        0 -8px 0 -2px white,
-        0 8px 0 -2px white,
-        -6px -4px 0 -4px white,
-        6px -4px 0 -4px white,
-        -6px 4px 0 -4px white,
-        6px 4px 0 -4px white;
-}
-
-/* Service 2 - Posture Analysis Icon */
-.service-2-logo::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.service-2-logo::after {
-    content: '';
-    width: 14px;
-    height: 18px;
-    background: white;
-    border-radius: 7px 7px 3px 3px;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 
-        -8px 0 0 -6px white,
-        8px 0 0 -6px white;
-}
-
-/* Service 3 - Therapeutic Massage Icon */
-.service-3-logo::before {
-    content: '';
-    width: 12px;
-    height: 8px;
-    background: white;
-    border-radius: 6px 6px 2px 2px;
-    position: absolute;
-    top: 14px;
-    left: 16px;
-    transform: rotate(-15deg);
-}
-
-.service-3-logo::after {
-    content: '';
-    width: 12px;
-    height: 8px;
-    background: white;
-    border-radius: 6px 6px 2px 2px;
-    position: absolute;
-    bottom: 14px;
-    right: 16px;
-    transform: rotate(15deg);
-    box-shadow: 
-        -6px -12px 0 -2px white;
-}
-
-/* Service 4 - Cupping Icon */
-.service-4-logo::before {
-    content: '';
-    width: 12px;
-    height: 8px;
-    background: white;
-    border-radius: 6px 6px 2px 2px;
-    position: absolute;
-    top: 14px;
-    left: 16px;
-    transform: rotate(-15deg);
-}
-
-.service-4-logo::after {
-   content: '';
-    width: 12px;
-    height: 8px;
-    background: white;
-    border-radius: 6px 6px 2px 2px;
-    position: absolute;
-    bottom: 14px;
-    right: 16px;
-    transform: rotate(15deg);
-    box-shadow: 
-        -6px -12px 0 -2px white;
-}
-
-/* Service 5 - Dry Needling Icon */
-.service-5-logo::before {
-    content: '';
-    width: 2px;
-    height: 24px;
-    background: white;
-    border-radius: 1px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.service-5-logo::after {
-    content: '';
-    width: 8px;
-    height: 3px;
-    background: white;
-    border-radius: 2px;
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 
-        -6px 6px 0 -1px white,
-        6px 6px 0 -1px white,
-        0 12px 0 -1px white;
-}
-
-/* Service 6 - Mobilization Exercises Icon */
-.service-6-logo::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.service-6-logo::after {
-    content: '';
-    width: 14px;
-    height: 16px;
-    background: white;
-    border-radius: 7px 7px 3px 3px;
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 
-        -10px -4px 0 -8px white,
-        10px -4px 0 -8px white,
-        -6px 4px 0 -8px white,
-        6px 4px 0 -8px white;
-}
-
-/* Headings - Ensure consistent alignment for all 6 services */
-.service-1-heading,
-.service-2-heading,
-.service-3-heading,
-.service-4-heading,
-.service-5-heading,
-.service-6-heading{
-    padding: 0 clamp(10px, 2.5vw, 40px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.service-1-title,
-.service-2-title,
-.service-3-title,
-.service-4-title,
-.service-5-title,
-.service-6-title{
-    color: #EB2526;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    font-size: clamp(10px, 3vw, 48px);
-    margin: 6px 0 10px;
-    text-align: center;
-}
-
-/* Paragraphs for all 6 services */
-.service-1-content,
-.service-2-content,
-.service-3-content,
-.service-4-content,
-.service-5-content,
-.service-6-content{
-    padding: 0 clamp(18px, 3vw, 40px) clamp(28px, 4vw, 40px);
-}
-
-.service-1-content p,
-.service-2-content p,
-.service-3-content p,
-.service-4-content p,
-.service-5-content p,
-.service-6-content p{
-    color: #000000;
-    line-height: 1.85;
-    max-width: 48ch;
-    margin: 0 auto;
-}
-
 /* FIXED CSS FOR FLOATING LABELS */
 #booking.booking {
     padding: 6rem 2rem;
@@ -950,12 +87,14 @@ section[id] { scroll-margin-top: var(--nav-height); }
     z-index: 3;
 }
 
-/* FIXED: Floating label animations for both input and textarea */
+/* FIXED: Floating label animations - proper positioning to avoid overlap */
 .floating-field input:focus + label,
 .floating-field input.has-value + label,
+.floating-field input:not(:placeholder-shown) + label,
 .floating-field textarea:focus + label,
-.floating-field textarea.has-value + label {
-    top: -8px;
+.floating-field textarea.has-value + label,
+.floating-field textarea:not(:placeholder-shown) + label {
+    top: -12px; /* Changed from -8px to ensure label doesn't overlap input */
     left: 15px;
     font-size: 0.85rem;
     color: white;
@@ -1140,10 +279,16 @@ section[id] { scroll-margin-top: var(--nav-height); }
     opacity: 0.9;
 }
 
-/* Responsive Design */
+/* Responsive Design - Fixed mobile navigation interaction */
 @media (max-width: 768px) {
+    :root {
+        --logo-size: 56px;
+        --nav-vpad: 10px;
+    }
+    
     .hamburger {
         display: flex;
+        z-index: 1001; /* Ensure hamburger is clickable */
     }
 
     .nav-menu {
@@ -1151,7 +296,7 @@ section[id] { scroll-margin-top: var(--nav-height); }
         left: -100%;
         top: var(--nav-height);
         flex-direction: column;
-        background-color: white;
+        background-color: black; /* Changed to black to match navbar */
         width: 100%;
         text-align: center;
         transition: 0.3s;
@@ -1163,6 +308,12 @@ section[id] { scroll-margin-top: var(--nav-height); }
 
     .nav-menu.active {
         left: 0;
+    }
+    
+    .nav-menu li a {
+        color: #fff; /* Ensure text is visible on black background */
+        display: block;
+        padding: 15px 20px;
     }
 
     /* Mobile hero fixes */
@@ -1203,6 +354,16 @@ section[id] { scroll-margin-top: var(--nav-height); }
     .about-picture {
         order: 2;
         min-height: 300px;
+        aspect-ratio: 4 / 5;
+    }
+    
+    .about-picture .about-img {
+        object-position: 50% 40%;
+    }
+    
+    .headshot-img {
+        width: 200px;
+        height: 200px;
     }
 
     /* Mobile services fixes */
@@ -1219,7 +380,6 @@ section[id] { scroll-margin-top: var(--nav-height); }
         grid-template-columns: 1fr;
         grid-template-rows: repeat(18, auto);
         padding: 20px 0;
-        /* Mobile: remove complex borders, use simple ones */
         background: 
             linear-gradient(#EB2526 0 0) 0 0/100% 1px no-repeat,
             linear-gradient(#EB2526 0 0) 0 100%/100% 1px no-repeat,
@@ -1253,21 +413,13 @@ section[id] { scroll-margin-top: var(--nav-height); }
     .service-6-content{ grid-column:1; grid-row:18; padding-bottom: 20px; }
 
     /* Mobile service content adjustments */
-    .service-1-content,
-    .service-2-content,
-    .service-3-content,
-    .service-4-content,
-    .service-5-content,
-    .service-6-content {
+    .service-1-content, .service-2-content, .service-3-content,
+    .service-4-content, .service-5-content, .service-6-content {
         padding: 0 20px 20px;
     }
 
-    .service-1-title,
-    .service-2-title,
-    .service-3-title,
-    .service-4-title,
-    .service-5-title,
-    .service-6-title {
+    .service-1-title, .service-2-title, .service-3-title,
+    .service-4-title, .service-5-title, .service-6-title {
         font-size: clamp(16px, 5vw, 20px);
         margin: 10px 0;
     }
@@ -1309,6 +461,11 @@ section[id] { scroll-margin-top: var(--nav-height); }
 
 /* Additional mobile breakpoint for very small screens */
 @media (max-width: 480px) {
+    :root {
+        --logo-size: 44px;
+        --nav-vpad: 8px;
+    }
+    
     .hero-content {
         padding: 30px 16px 24px;
     }
@@ -1329,23 +486,781 @@ section[id] { scroll-margin-top: var(--nav-height); }
         padding: 20px 16px;
     }
     
-    .service-1-content,
-    .service-2-content,
-    .service-3-content,
-    .service-4-content,
-    .service-5-content,
-    .service-6-content {
+    .service-1-content, .service-2-content, .service-3-content,
+    .service-4-content, .service-5-content, .service-6-content {
         padding: 0 16px 16px;
     }
 }
 
-/* Responsive: shrink on smaller screens */
+/* Update responsive breakpoints for logo sizing */
 @media (max-width: 1024px){
-    :root{ --logo-size: 96px; }
+    :root{ 
+        --logo-size: 80px; 
+    }
+}/* OUR SERVICES STYLING - Updated for 6 services in 2 rows with proper spacing */
+.our-services {
+    background: linear-gradient(135deg, #fff9f9 0%, #f9fafb 100%);
+    padding: clamp(56px, 7vw, 96px) 16px;
 }
-@media (max-width: 768px){
-    :root{ --logo-size: 56px; --nav-vpad: 10px; }
+
+.our-services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 40px;
 }
-@media (max-width: 480px){
-    :root{ --logo-size: 44px; --nav-vpad: 8px; }
+
+.our-services-title {
+    color: rgb(235, 37, 38);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-size: clamp(40px,6.5vw,92px);
+    margin: 0;
+}
+
+.services {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    grid-template-rows: repeat(6, auto);
+    gap: 0;
+    text-align: center;
+    padding: clamp(28px, 4vw, 40px) 0;
+    background:
+        linear-gradient(#EB2526 0 0) 33.333% 0/1px 100% no-repeat,
+        linear-gradient(#EB2526 0 0) 66.666% 0/1px 100% no-repeat,
+        linear-gradient(#EB2526 0 0) 0 50%/100% 1px no-repeat,
+        linear-gradient(#EB2526 0 0) 0 0/100% 1px no-repeat,
+        linear-gradient(#EB2526 0 0) 0 100%/100% 1px no-repeat,
+        linear-gradient(#EB2526 0 0) 0 0/1px 100% no-repeat,
+        linear-gradient(#EB2526 0 0) 100% 0/1px 100% no-repeat;
+}
+
+/* TOP ROW - SERVICES 1-3 */
+.service-1-container{ grid-column:1; grid-row:1; padding-top: clamp(20px, 3vw, 30px); }
+.service-1-heading{ grid-column:1; grid-row:2; }
+.service-1-content{ grid-column:1; grid-row:3; }
+
+.service-2-container{ grid-column:2; grid-row:1; padding-top: clamp(20px, 3vw, 30px); }
+.service-2-heading{ grid-column:2; grid-row:2; }
+.service-2-content{ grid-column:2; grid-row:3; }
+
+.service-3-container{ grid-column:3; grid-row:1; padding-top: clamp(20px, 3vw, 30px); }
+.service-3-heading{ grid-column:3; grid-row:2; }
+.service-3-content{ grid-column:3; grid-row:3; }
+
+/* BOTTOM ROW - SERVICES 4-6 */
+.service-4-container{ grid-column:1; grid-row:4; padding-top: clamp(20px, 3vw, 30px); }
+.service-4-heading{ grid-column:1; grid-row:5; }
+.service-4-content{ grid-column:1; grid-row:6; }
+
+.service-5-container{ grid-column:2; grid-row:4; padding-top: clamp(20px, 3vw, 30px); }
+.service-5-heading{ grid-column:2; grid-row:5; }
+.service-5-content{ grid-column:2; grid-row:6; }
+
+.service-6-container{ grid-column:3; grid-row:4; padding-top: clamp(20px, 3vw, 30px); }
+.service-6-heading{ grid-column:3; grid-row:5; }
+.service-6-content{ grid-column:3; grid-row:6; }
+
+/* Service Icons */
+.service-1-logo, .service-2-logo, .service-3-logo,
+.service-4-logo, .service-5-logo, .service-6-logo{
+    width: 56px; 
+    height: 56px;
+    margin: 8px auto 14px;
+    border-radius: 50%;
+    background: #EB2526;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Service 1 - Chiropractic Adjustments Icon */
+.service-1-logo::before {
+    content: '';
+    width: 4px;
+    height: 28px;
+    background: white;
+    border-radius: 2px;
+    position: relative;
+    z-index: 2;
+}
+
+.service-1-logo::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 
+        0 -8px 0 -2px white,
+        0 8px 0 -2px white,
+        -6px -4px 0 -4px white,
+        6px -4px 0 -4px white,
+        -6px 4px 0 -4px white,
+        6px 4px 0 -4px white;
+}
+
+/* Service 2 - Posture Analysis Icon */
+.service-2-logo::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.service-2-logo::after {
+    content: '';
+    width: 14px;
+    height: 18px;
+    background: white;
+    border-radius: 7px 7px 3px 3px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 
+        -8px 0 0 -6px white,
+        8px 0 0 -6px white;
+}
+
+/* Service 3 - Therapeutic Massage Icon */
+.service-3-logo::before {
+    content: '';
+    width: 12px;
+    height: 8px;
+    background: white;
+    border-radius: 6px 6px 2px 2px;
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    transform: rotate(-15deg);
+}
+
+.service-3-logo::after {
+    content: '';
+    width: 12px;
+    height: 8px;
+    background: white;
+    border-radius: 6px 6px 2px 2px;
+    position: absolute;
+    bottom: 14px;
+    right: 16px;
+    transform: rotate(15deg);
+    box-shadow: 
+        -6px -12px 0 -2px white;
+}
+
+/* Service 4 - Cupping Icon */
+.service-4-logo::before {
+    content: '';
+    width: 12px;
+    height: 8px;
+    background: white;
+    border-radius: 6px 6px 2px 2px;
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    transform: rotate(-15deg);
+}
+
+.service-4-logo::after {
+   content: '';
+    width: 12px;
+    height: 8px;
+    background: white;
+    border-radius: 6px 6px 2px 2px;
+    position: absolute;
+    bottom: 14px;
+    right: 16px;
+    transform: rotate(15deg);
+    box-shadow: 
+        -6px -12px 0 -2px white;
+}
+
+/* Service 5 - Dry Needling Icon */
+.service-5-logo::before {
+    content: '';
+    width: 2px;
+    height: 24px;
+    background: white;
+    border-radius: 1px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.service-5-logo::after {
+    content: '';
+    width: 8px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 
+        -6px 6px 0 -1px white,
+        6px 6px 0 -1px white,
+        0 12px 0 -1px white;
+}
+
+/* Service 6 - Mobilization Exercises Icon */
+.service-6-logo::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.service-6-logo::after {
+    content: '';
+    width: 14px;
+    height: 16px;
+    background: white;
+    border-radius: 7px 7px 3px 3px;
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 
+        -10px -4px 0 -8px white,
+        10px -4px 0 -8px white,
+        -6px 4px 0 -8px white,
+        6px 4px 0 -8px white;
+}
+
+/* Headings */
+.service-1-heading, .service-2-heading, .service-3-heading,
+.service-4-heading, .service-5-heading, .service-6-heading{
+    padding: 0 clamp(10px, 2.5vw, 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.service-1-title, .service-2-title, .service-3-title,
+.service-4-title, .service-5-title, .service-6-title{
+    color: #EB2526;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-size: clamp(10px, 3vw, 48px);
+    margin: 6px 0 10px;
+    text-align: center;
+}
+
+/* Paragraphs */
+.service-1-content, .service-2-content, .service-3-content,
+.service-4-content, .service-5-content, .service-6-content{
+    padding: 0 clamp(18px, 3vw, 40px) clamp(28px, 4vw, 40px);
+}
+
+.service-1-content p, .service-2-content p, .service-3-content p,
+.service-4-content p, .service-5-content p, .service-6-content p{
+    color: #000000;
+    line-height: 1.85;
+    max-width: 48ch;
+    margin: 0 auto;
+}/* SECTION DIVIDERS */
+.section-divider {
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
+    margin: 0;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Add divider before our-services */
+.our-services::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
+    margin: 0 0 clamp(40px, 6vw, 80px) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.our-services::before::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    animation: shimmer 3s infinite;
+}
+
+/* Add divider before booking */
+.booking::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
+    margin: 0 0 clamp(40px, 6vw, 80px) 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add divider before testimonials */
+.testimonials::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, transparent 0%, #EB2526 20%, #EB2526 80%, transparent 100%);
+    margin: 0 0 clamp(40px, 6vw, 80px) 0;
+    position: relative;
+    overflow: hidden;
+}.about .about-content p{
+    color: black;
+    max-width: none;
+    margin: 0 0 40px;
+    line-height: 1.7;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.about-picture .about-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--about-focus-x) var(--about-focus-y);
+}
+
+.about-picture::after {
+    content: "Professional Chiropractic Care";
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+}/* Color Scheme : Red Black White  
+Red Hex Code: EB2526
+Black Hex Code: 000000
+White Hex Code: FFFFFF
+*/
+
+/*Universal Selector*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ACCESSIBILITY STYLES */
+/* Skip link for screen readers */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #EB2526;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    z-index: 9999;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+/* Screen reader only text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Error message styles */
+.error-message {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 4px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+/* Focus indicators for better keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+.hamburger:focus {
+    outline: 3px solid #EB2526;
+    outline-offset: 2px;
+}
+
+/* High contrast focus for navigation */
+.nav-menu a:focus {
+    background: rgba(235, 37, 38, 0.2);
+    outline: 2px solid #fff;
+}
+
+/* Improve button accessibility */
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* SCROLL BEHAVIOR */
+html {
+    scroll-behavior: smooth;
+}
+
+:root{
+    --logo-size: 100px;          
+    --ring-grow: 0.5px;         
+    --nav-vpad: 8px;            
+    --nav-height: calc(var(--logo-size) + (var(--nav-vpad) * 2));
+    --logo-shift-x: 0px;        
+    --about-focus-x: 85%;   
+    --about-focus-y: 50%;
+}
+  
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #fef7f7 0%, #f9fafb 100%);
+    min-height: 100vh;
+}
+
+/* Navigation Styles - Fixed positioning and removed red underline */
+.navbar{
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    right: 0;
+    background: black;
+    box-shadow: 0 8px 25px rgba(208, 0, 0, 0.25);
+    z-index: 1000;
+    padding: 0;                   
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--nav-vpad) 2rem;
+    height: var(--nav-height);
+}
+
+/* Logo positioning fix for desktop */
+.nav-logo{
+    position: relative;
+    display: inline-block;
+    width: var(--logo-size);
+    height: var(--logo-size);
+    cursor: pointer;
+    margin-right: auto; /* Push everything else to the right */
+}
+
+/* IMPORTANT: kill the old pseudo-element image */
+.nav-logo.with-image::before{
+    content: none !important;
+}
+  
+/* Show the actual PNG */
+.nav-logo-img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: translateX(var(--logo-shift-x));
+    display: block;
+}
+
+/* Make anchored scrolling land below the fixed navbar */
+section[id] { 
+    scroll-margin-top: var(--nav-height); 
+}
+
+/* Navigation menu styles */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin-left: auto; /* Ensure menu stays on the right */
+}
+
+.nav-menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.nav-menu li a:hover,
+.nav-menu li a.active {
+    color: #EB2526;
+    background: rgba(235, 37, 38, 0.05);
+}
+
+/* REMOVED the red underline animation */
+.nav-menu li a::after {
+    display: none; /* Completely remove the red underline */
+}
+
+/* Hamburger styles for mobile - Fixed white bars */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+    background: transparent;
+    border: none;
+}
+
+.hamburger .bar {
+    width: 25px;
+    height: 3px;
+    background: #fff; /* Changed from #333 to white for visibility on black navbar */
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hamburger animation when active */
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* HERO SECTION */
+.hero {
+    margin-top: var(--nav-height);
+    background: #fff;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(64px, 10vw, 140px) 16px 48px;
+    text-align: center;
+    overflow: visible;
+}
+
+.hero-button { 
+    margin-top: 8px;
+}
+
+.hero-mini-title {
+    color: #EB2526;
+    font-size: clamp(14px, 1.6vw, 20px);
+    margin: 0 0 12px;
+    font-weight: 500;
+}
+
+.hero-title {
+    color: black;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-size: clamp(40px, 7vw, 90px);
+    margin: 0 0 24px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 99px;
+    background: #EB2526;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(235, 37, 38, .2);
+    transition: transform .15s ease, opacity .15s ease;
+}
+
+.btn-primary:hover{ 
+    transform: translateY(-1px); 
+    opacity: .95;
+}
+
+/* Image strip directly UNDER the hero copy, full-bleed across page */
+.hero-picture {
+    margin-top: 40px;
+    height: clamp(260px, 42vw, 560px);
+    background: linear-gradient(135deg, #EB2526 0%, #dc2626 100%);
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.hero-picture .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-picture::after {
+    content: "";
+}
+
+/* ABOUT SECTION STYLING - Fixed desktop responsiveness */
+.about {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    gap: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+.about-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(60px, 8vw, 120px) clamp(60px, 10vw, 150px);
+    background: linear-gradient(135deg, #fff9f9 0%, #f9fafb 100%);
+    order: 1;
+    text-align: center;
+    width: 100%;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 18px 36px;
+    border-radius: 999px;
+    background: #EB2526;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(235, 37, 38, .2);
+    transition: transform .15s ease, opacity .15s ease;
+    cursor: pointer;
+    width: fit-content;
+    margin: 32px auto 0;
+    font-size: 1.1rem;
+}
+
+.btn-secondary:hover { 
+    transform: translateY(-1px); 
+    opacity: .95;
+}
+
+/* Updated about picture for better desktop display */
+.about-picture{
+    position: relative;
+    min-height: 600px; /* Increased from 500px for better desktop display */
+    overflow: hidden;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+    order: 2;
+}
+
+.about-title {
+    color: black;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-size: clamp(35px, 6.5vw, 60px);
+    margin: 0 0 32px;
+    text-align: center;
+}
+
+/* Fixed headshot sizing for desktop */
+.about-headshot {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.headshot-img {
+    width: 250px; /* Increased from 200px for better desktop visibility */
+    height: 250px; /* Increased from 200px */
+    border-radius: 16px;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 4px solid #EB2526;
+    box-shadow: 0 8px 25px rgba(235, 37, 38, 0.2);
+}
+
+/* Desktop-specific enhancements */
+@media (min-width: 1200px) {
+    .headshot-img {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .about-picture {
+        min-height: 700px;
+    }
 }
