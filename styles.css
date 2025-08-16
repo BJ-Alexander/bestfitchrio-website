@@ -969,7 +969,6 @@ html {
 
 :root{
     --logo-size: 100px;          
-    --ring-grow: 0.5px;         
     --nav-vpad: 8px;            
     --nav-height: calc(var(--logo-size) + (var(--nav-vpad) * 2));
     --logo-shift-x: 0px;        
@@ -993,22 +992,23 @@ body {
     left: 0; 
     right: 0;
     background: black;
-    box-shadow: 0 8px 25px rgba(208, 0, 0, 0.25);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Changed from red shadow to black */
     z-index: 1000;
     padding: 0;                   
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1400px; /* Increased from 1200px for wider screens */
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: var(--nav-vpad) 2rem;
     height: var(--nav-height);
+    position: relative;
 }
 
-/* Logo positioning fix for desktop */
+/* Logo positioning fix for desktop - far left */
 .nav-logo{
     position: relative;
     display: inline-block;
@@ -1016,11 +1016,29 @@ body {
     height: var(--logo-size);
     cursor: pointer;
     margin-right: auto; /* Push everything else to the right */
+    flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+/* Additional desktop positioning for very wide screens */
+@media (min-width: 1400px) {
+    .nav-container {
+        padding: var(--nav-vpad) 3rem; /* More padding on very wide screens */
+    }
+    
+    .nav-logo {
+        margin-right: calc(100% - var(--logo-size) - 600px); /* Keep logo far left */
+    }
 }
 
 /* IMPORTANT: kill the old pseudo-element image */
 .nav-logo.with-image::before{
     content: none !important;
+}
+
+/* Remove any potential red ring or border */
+.nav-logo::after {
+    content: none !important;
+    display: none !important;
 }
   
 /* Show the actual PNG */
@@ -1253,14 +1271,29 @@ section[id] {
     box-shadow: 0 8px 25px rgba(235, 37, 38, 0.2);
 }
 
-/* Desktop-specific enhancements */
+/* Desktop-specific enhancements for about section */
 @media (min-width: 1200px) {
     .headshot-img {
-        width: 280px;
+        width: 280px;  /* Large desktop: 280x280px headshot */
         height: 280px;
     }
     
     .about-picture {
-        min-height: 700px;
+        min-height: 700px;  /* Large desktop: 700px min height for about picture */
+    }
+}
+
+@media (min-width: 1600px) {
+    .headshot-img {
+        width: 300px;  /* Extra large desktop: 300x300px headshot */
+        height: 300px;
+    }
+    
+    .about-picture {
+        min-height: 800px;  /* Extra large desktop: 800px min height */
+    }
+    
+    .about-container {
+        padding: clamp(80px, 10vw, 140px) clamp(80px, 12vw, 180px);
     }
 }
