@@ -324,5 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    
+
     console.log('BestFit Chiropractic JavaScript loaded successfully!');
 });
