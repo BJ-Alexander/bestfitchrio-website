@@ -1,4 +1,4 @@
-// BestFit Chiropractic - Complete JavaScript Functionality with Fixes
+// BestFit Chiropractic - Complete JavaScript Functionality with EmailJS
 document.addEventListener('DOMContentLoaded', function() {
     
     // Hamburger menu functionality - FIXED for mobile interaction
@@ -157,16 +157,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Form submission handling - Updated for mailto functionality
+    // Form submission handling - Updated for EmailJS
     const bookingForm = document.querySelector('#contact-form');
     const formStatus = document.querySelector('#form-status');
     const submitButton = document.querySelector('#submit-button');
     
     if (bookingForm) {
         bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Always prevent default for EmailJS
+            
             // Clear any previous status messages
             if (formStatus) {
                 formStatus.style.display = 'none';
+            }
+            
+            // Disable submit button during processing
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
             }
             
             // Get form data
@@ -187,73 +195,72 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Basic validation
             if (!firstName || !lastName || !email || !phone) {
-                e.preventDefault();
                 showFormStatus('Please fill in all required fields.', 'error');
+                resetSubmitButton();
                 return;
             }
             
             // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                e.preventDefault();
                 showFormStatus('Please enter a valid email address.', 'error');
+                resetSubmitButton();
                 return;
             }
             
             // Phone validation (basic)
             const phoneRegex = /^[\d\s\-\+\(\)]+$/;
             if (!phoneRegex.test(phone)) {
-                e.preventDefault();
                 showFormStatus('Please enter a valid phone number.', 'error');
+                resetSubmitButton();
                 return;
             }
             
-            // For mailto, we need to format the subject and body
-            const subject = encodeURIComponent('New Appointment Request from BestFit Chiropractic');
-            const body = encodeURIComponent(
-                `New Appointment Request\n\n` +
-                `First Name: ${firstName}\n` +
-                `Last Name: ${lastName}\n` +
-                `Email: ${email}\n` +
-                `Phone: ${phone}\n` +
-                `Areas of Concern: ${areasText}\n` +
-                `Message: ${message}\n\n` +
-                `Please contact the patient to schedule their appointment.`
-            );
+            // Prepare template parameters for EmailJS
+            const templateParams = {
+                from_name: `${firstName} ${lastName}`,
+                from_email: email,
+                phone: phone,
+                body_areas: areasText,
+                message: message,
+                to_email: 'bestfitchiropractic@gmail.com'
+            };
             
-            // Update the form action with subject and body
-            const emailAddress = 'bestfitchiropractic@gmail.com';
-            this.action = `mailto:${emailAddress}?subject=${subject}&body=${body}`;
-            
-            // Show success message
-            showFormStatus(
-                'Opening your email client to send the appointment request...', 
-                'success'
-            );
-            
-            // Note: The form will now submit naturally and open the email client
-            // After a delay, reset the form
-            setTimeout(() => {
-                // Reset form
-                bookingForm.reset();
-                inputs.forEach(input => {
-                    input.classList.remove('has-value', 'focused');
+            // Send email using EmailJS - REPLACE THESE WITH YOUR ACTUAL VALUES
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    showFormStatus('Thank you! Your appointment request has been sent successfully.', 'success');
+                    
+                    // Reset form
+                    bookingForm.reset();
+                    inputs.forEach(input => {
+                        input.classList.remove('has-value', 'focused');
+                    });
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        if (formStatus) {
+                            formStatus.style.display = 'none';
+                        }
+                    }, 5000);
+                })
+                .catch(function(error) {
+                    console.log('FAILED...', error);
+                    showFormStatus('Sorry, there was an error sending your message. Please try again or call us directly.', 'error');
+                })
+                .finally(function() {
+                    resetSubmitButton();
                 });
-                
-                // Update success message
-                showFormStatus(
-                    'Email client opened! Please send the email to complete your appointment request.', 
-                    'success'
-                );
-                
-                // Hide message after additional time
-                setTimeout(() => {
-                    if (formStatus) {
-                        formStatus.style.display = 'none';
-                    }
-                }, 5000);
-            }, 1000);
         });
+    }
+    
+    // Helper function to reset submit button
+    function resetSubmitButton() {
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Send Request';
+        }
     }
     
     // Function to show form status messages
@@ -324,7 +331,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    
-
-    console.log('BestFit Chiropractic JavaScript loaded successfully!');
+    console.log('BestFit Chiropractic JavaScript with EmailJS loaded successfully!');
 });

@@ -203,8 +203,8 @@
                     </header>
                     <div class="booking-form">
                         <div class="booking-content">
-                            <!-- Contact form with comprehensive ARIA support -->
-                            <form action="mailto:bestfitchiropractic@gmail.com" method="POST" enctype="text/plain" id="contact-form" role="form" aria-labelledby="booking-title" aria-describedby="form-description">
+                            <!-- Updated contact form for EmailJS - removed mailto action -->
+                            <form id="contact-form" role="form" aria-labelledby="booking-title" aria-describedby="form-description">
                                 
                                 <p id="form-description" class="sr-only">Fill out this form to schedule your consultation call with BestFit Chiropractic. All fields marked with asterisk are required.</p>
                                 
@@ -294,8 +294,8 @@
                                 <!-- Form Status Messages with ARIA live region -->
                                 <div id="form-status" class="form-status" role="status" aria-live="polite" aria-atomic="true"></div>
         
-                                <input type="submit" value="Schedule My Call" id="submit-button" aria-describedby="submit-help">
-                                <div id="submit-help" class="sr-only">This will open your email client to send us your information</div>
+                                <input type="submit" value="Send Request" id="submit-button" aria-describedby="submit-help">
+                                <div id="submit-help" class="sr-only">This will send your information directly to BestFit Chiropractic</div>
                             </form>
                         </div>
                     </div>
@@ -343,7 +343,17 @@
             </div>
         </footer>
 
-        <!-- JavaScript file -->
+        <!-- EmailJS Scripts - Add these BEFORE your script.js -->
+        <script type="text/javascript" 
+                src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+        </script>
+        <script type="text/javascript">
+            (function(){
+                emailjs.init("UaHzD-egD79L6fdg4"); // Replace with your actual public key from EmailJS
+            })();
+        </script>
+
+        <!-- Your JavaScript file -->
         <script src="script.js"></script>
     </body>
 </html>
