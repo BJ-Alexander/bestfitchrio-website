@@ -223,11 +223,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 phone: phone,
                 body_areas: areasText,
                 message: message,
-                to_email: 'bestfitchiropractic@gmail.com'
             };
             
             // Send email using EmailJS - REPLACE THESE WITH YOUR ACTUAL VALUES
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            emailjs.send('service_0w0t42h', 'template_zk62v45', templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                     showFormStatus('Thank you! Your appointment request has been sent successfully.', 'success');
